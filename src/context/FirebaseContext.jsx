@@ -1,6 +1,6 @@
-import { createContext, useEffect, useState } from "react";
-import { collection, getDocs } from "firebase/firestore";
-import { db } from "../../firebase";
+import { createContext, useEffect, useState } from 'react';
+import { collection, getDocs, onSnapshot } from 'firebase/firestore';
+import { db } from '../../firebase';
 
 export const FirebaseContext = createContext();
 
@@ -9,26 +9,26 @@ export const FirebaseProvider = ({ children }) => {
   const [usuarios, setUsuarios] = useState([]);
 
   useEffect(() => {
-    const getProductos = async () => {
-      const collectionReference = collection(db, "productos");
-      const productoFirestore = await getDocs(collectionReference);
-      const productosArray = productoFirestore.docs.map((doc) => ({
-        id: doc.id,
-        ...doc.data(),
-      }));
-
-      setProductos(productosArray);
+    const getProductos = () => {
+      const collectionReference = collection(db, 'productos');
+      onSnapshot(collectionReference, (snapshot) => {
+        const productosArray = snapshot.docs.map((doc) => ({
+          id: doc.id,
+          ...doc.data(),
+        }));
+        setProductos(productosArray);
+      });
     };
 
-    const getUsuarios = async () => {
-      const collectionReference = collection(db, "usuarios");
-      const usuarioFirestore = await getDocs(collectionReference);
-      const usuariosArray = usuarioFirestore.docs.map((doc) => ({
-        id: doc.id,
-        ...doc.data(),
-      }));
-
-      setUsuarios(usuariosArray);
+    const getUsuarios = () => {
+      const collectionReference = collection(db, 'usuarios');
+      onSnapshot(collectionReference, (snapshot) => {
+        const usuariosArray = snapshot.docs.map((doc) => ({
+          id: doc.id,
+          ...doc.data(),
+        }));
+        setUsuarios(usuariosArray);
+      });
     };
 
     getProductos();
