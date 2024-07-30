@@ -1,18 +1,23 @@
+import React from 'react';
 import { useFormik } from 'formik';
-import { useState } from 'react';
 import * as yup from 'yup';
 import {
   TextField,
   Button,
   Container,
+  Typography,
   InputAdornment,
   IconButton,
 } from '@mui/material';
-import { getAuth, createUserWithEmailAndPassword } from 'firebase/auth';
-import { collection, doc, setDoc } from 'firebase/firestore';
-import { db } from '../../firebase';
-import { IoEyeSharp } from 'react-icons/io5';
 import { FaEyeSlash } from 'react-icons/fa6';
+import { IoEyeSharp } from 'react-icons/io5';
+import { IoMdClose } from 'react-icons/io';
+import { getAuth, createUserWithEmailAndPassword } from 'firebase/auth';
+import { doc, setDoc } from 'firebase/firestore';
+import { db } from '../../firebase';
+import { useState } from 'react';
+import { useNavigate } from 'react-router';
+
 const validationSchema = yup.object({
   email: yup
     .string('Enter your email')
@@ -25,8 +30,9 @@ const validationSchema = yup.object({
 });
 
 export const Registrar = () => {
-  const [typePassword, setTypePassword] = useState('password');
+  const navigate = useNavigate();
   const auth = getAuth();
+  const [typePassword, setTypePassword] = useState('password');
   const formik = useFormik({
     initialValues: {
       nombre: 'pepito',
@@ -61,9 +67,10 @@ export const Registrar = () => {
   });
   return (
     <Container as="form" onSubmit={formik.handleSubmit}>
+      <IoMdClose onClick={() => navigate('/')} />
       <TextField
         fullWidth
-        id="nombreRegistro"
+        id="nombre"
         name="nombre"
         label="nombre"
         value={formik.values.nombre}
@@ -72,7 +79,6 @@ export const Registrar = () => {
         error={formik.touched.nombre && Boolean(formik.errors.nombre)}
         helperText={formik.touched.nombre && formik.errors.nombre}
       />
-
       <TextField
         fullWidth
         id="emailRegistro"
@@ -116,6 +122,10 @@ export const Registrar = () => {
       <Button color="primary" variant="contained" fullWidth type="submit">
         Registrarse
       </Button>
+      <Typography>
+        Si ya tienes cuenta,
+        <Button onClick={() => navigate('/Login')}>inicia sesión</Button>
+      </Typography>
     </Container>
   );
 };

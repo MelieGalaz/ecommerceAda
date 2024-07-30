@@ -1,16 +1,15 @@
 import './App.css';
 
-import { Registrar } from './rutas/Registrar';
-import { CardContenedor } from './componentes/CardContenedor';
+import { Footer } from './layout/Footer';
 import { Header } from './layout/Header';
-import { Login } from './rutas/Login';
+import { Main } from './layout/Main';
 function App() {
   return (
     <>
       <Header />
-      <CardContenedor />
-      <Registrar />
-      <Login />
+      <Main />
+
+      <Footer />
     </>
   );
 }
