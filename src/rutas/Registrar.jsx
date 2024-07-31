@@ -59,7 +59,7 @@ export const Registrar = () => {
         };
         await setDoc(doc(db, 'users', user.id), user);
         console.log(user);
-        // navigate("/");
+        navigate('/Login');
       } catch (error) {
         console.error('Error during registration: ', error.code, error.message);
       }

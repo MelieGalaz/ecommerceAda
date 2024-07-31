@@ -142,7 +142,7 @@ const validationSchema = yup.object({
 });
 
 export const Login = () => {
-  const { loginUser, user } = useContext(FirebaseContext);
+  const { user, setUser } = useContext(FirebaseContext);
   const navigate = useNavigate();
   const auth = getAuth();
   const [typePassword, setTypePassword] = useState('password');
@@ -155,14 +155,30 @@ export const Login = () => {
     validationSchema: validationSchema,
     onSubmit: async (values) => {
       try {
-        await loginUser(values);
-        console.log('User:', user);
+        setUser(null);
+        const userCredential = await signInWithEmailAndPassword(
+          auth,
+          values.email,
+          values.password
+        );
+        const loggedInUser = userCredential.user;
+
+        setUser({
+          id: loggedInUser.uid,
+          email: loggedInUser.email,
+        });
+
+        // navigate('/');
       } catch (error) {
         console.error('Error during login:', error.code, error.message);
       }
     },
   });
-
+  const handleEmailChange = (event) => {
+    // Limpiar el usuario anterior al cambiar el campo de correo electrónico
+    setUser(null);
+    formik.handleChange(event);
+  };
   return (
     <Container as="form" onSubmit={formik.handleSubmit}>
       <IoMdClose onClick={() => navigate('/')} />
@@ -172,7 +188,7 @@ export const Login = () => {
         name="email"
         label="Email"
         value={formik.values.email}
-        onChange={formik.handleChange}
+        onChange={handleEmailChange}
         onBlur={formik.handleBlur}
         error={formik.touched.email && Boolean(formik.errors.email)}
         helperText={formik.touched.email && formik.errors.email}
@@ -217,7 +233,8 @@ export const Login = () => {
       </Typography>
       <div>
         <h2>Welcome, {user?.username}</h2>
-        <p>Email: {user?.email}</p>
+        <p>Email: {user?.mail}</p>
+        <p>id: {user?.id}</p>
       </div>
     </Container>
   );
