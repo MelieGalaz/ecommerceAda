@@ -6,6 +6,7 @@ import Button from '@mui/material/Button';
 import { useNavigate } from 'react-router';
 import { CarritoContext } from '../context/CarritoContex';
 import { Typography } from '@mui/material';
+import { ContadorProducto } from './ContadorProducto';
 
 export const Carrito = ({ state, toggleDrawer }) => {
   const { carrito, EliminarUnProducto } = useContext(CarritoContext);
@@ -14,8 +15,8 @@ export const Carrito = ({ state, toggleDrawer }) => {
     <Box
       sx={{ width: anchor === 'top' || anchor === 'bottom' ? 'auto' : 250 }}
       role="presentation"
-      onClick={toggleDrawer(anchor, false)}
-      onKeyDown={toggleDrawer(anchor, false)}
+      onClick={(event) => event.stopPropagation()}
+      onKeyDown={(event) => event.stopPropagation()}
     >
       {carrito.length === 0 ? (
         <Typography>No hay productos en el carrito</Typography>
@@ -32,6 +33,7 @@ export const Carrito = ({ state, toggleDrawer }) => {
             <Button onClick={() => EliminarUnProducto(producto)}>
               Eliminar
             </Button>
+            <ContadorProducto key={producto.id} producto={producto} />
           </Box>
         ))
       )}
