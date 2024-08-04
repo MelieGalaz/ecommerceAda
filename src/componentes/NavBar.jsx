@@ -96,7 +96,7 @@ export const NavBar = () => {
     },
   }));
   return (
-    <AppBar position="static">
+    <AppBar position="static" sx={{ backgroundColor: '#51074d' }}>
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           <Button sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
