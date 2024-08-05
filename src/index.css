@@ -4,3 +4,37 @@
   flex-direction: column;
   justify-content: space-between;
 }
+
+.slick-slide img {
+  width: 100%;
+  height: auto;
+}
+.carrusel-container {
+  width: 100%;
+  max-width: 930px;
+  margin: 20px auto;
+  position: relative;
+  overflow: hidden;
+}
+
+.slick-slide img {
+  width: 100%;
+  height: auto;
+}
+
+.slick-dots {
+  bottom: 10px;
+}
+
+.slick-dots li button:before {
+  color: #fff;
+  font-size: 12px;
+}
+
+.slick-dots li.slick-active button:before {
+  color: #51074d;
+}
+
+.slide-item {
+  position: relative;
+}

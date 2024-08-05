@@ -1,5 +1,11 @@
 import { Card } from './Card';
+import { Carrusel } from './Carrusel';
 
 export const CardContenedor = () => {
-  return <Card />;
+  return (
+    <>
+      <Carrusel />
+      <Card />
+    </>
+  );
 };

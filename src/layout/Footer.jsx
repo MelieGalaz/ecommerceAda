@@ -8,7 +8,7 @@ export const Footer = () => {
       sx={{
         width: '100%',
         textAlign: 'center',
-        marginTop: '20px',
+
         backgroundColor: '#51074d',
       }}
     >

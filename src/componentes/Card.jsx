@@ -24,14 +24,14 @@ export const Card = () => {
         flexWrap: 'wrap',
         justifyContent: 'center',
         gap: '20px',
-        marginBlock: '20px',
+        marginBottom: '20px',
       }}
     >
       {productos?.map((producto) => (
         <Box
           key={producto.id}
           sx={{
-            width: 300,
+            width: 350,
             padding: '20px',
             borderRadius: '20px',
             backgroundImage: `url(${fondoCardCarrito})`,
