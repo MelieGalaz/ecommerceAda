@@ -7,12 +7,18 @@ export const CarritoProvider = ({ children }) => {
   const [cantidad, setCantidad] = useState(1);
 
   const agregarAlCarrito = (producto) => {
-    const existeEnCarrito = carrito.some((item) => item.id === producto.id);
-
-    if (!existeEnCarrito) {
-      const nuevoCarrito = [...carrito, { ...producto, cantidad: 1 }];
+    const productoExiste = carrito.find((item) => item.id === producto.id);
+    if (productoExiste) {
+      const nuevoCarrito = carrito.map((item) =>
+        item.id === producto.id
+          ? { ...item, cantidad: item.cantidad + 1 }
+          : item
+      );
       setCarrito(nuevoCarrito);
+    } else {
+      setCarrito([...carrito, { ...producto, cantidad: 1 }]);
     }
+    console.log('Carrito añadido', carrito);
   };
 
   const EliminarUnProducto = (productoAEliminar) => {

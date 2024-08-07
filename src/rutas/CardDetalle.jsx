@@ -1,54 +1,6 @@
-// import { useContext } from 'react';
-// import { useParams } from 'react-router-dom';
-// import { FirebaseContext } from '../context/FirebaseContext';
-// import { CarritoContext } from '../context/CarritoContex';
-// import { Box, Button, Typography } from '@mui/material';
-// import fondoCardCarrito from '../assets/fondoCardCarrito.avif';
-// export const CardDetalle = () => {
-//   const { id } = useParams();
-//   const { productos } = useContext(FirebaseContext);
-//   const { agregarAlCarrito } = useContext(CarritoContext);
-
-//   const producto = productos.find((producto) => producto.id === id);
-
-//   return (
-//     <div>
-//       {producto ? (
-//         <Box
-//           sx={{
-//             width: 300,
-//             padding: '20px',
-//             borderRadius: '20px',
-//             backgroundImage: `url(${fondoCardCarrito})`,
-//             backgroundSize: 'cover',
-//             backgroundPosition: 'top',
-//             backgroundRepeat: 'no-repeat',
-//             boxShadow: '0 4px 9px rgb(0 0 0 / 76%);',
-//             display: 'flex',
-//           }}
-//         >
-//           <img
-//             src={producto.image}
-//             alt={producto.name}
-//             style={{ width: '100%', borderRadius: '20px' }}
-//           />
-//           <Box>
-//             <Typography>Detalles del producto {producto.nombre}</Typography>
-//             <Typography>{producto.descripcion}</Typography>
-//             <Typography>Precio: {producto.precio}</Typography>
-//             <Button onClick={() => agregarAlCarrito(producto)}>
-//               agregar al carrito
-//             </Button>
-//           </Box>
-//         </Box>
-//       ) : (
-//         <p>Producto no encontrado</p>
-//       )}
-//     </div>
-//   );
-// };
 import { useContext } from 'react';
 import { useParams } from 'react-router-dom';
+import { useNavigate } from 'react-router';
 import { FirebaseContext } from '../context/FirebaseContext';
 import { CarritoContext } from '../context/CarritoContex';
 import { Box, Button, Typography } from '@mui/material';
@@ -58,7 +10,7 @@ export const CardDetalle = () => {
   const { id } = useParams();
   const { productos } = useContext(FirebaseContext);
   const { agregarAlCarrito } = useContext(CarritoContext);
-
+  const navigate = useNavigate();
   const producto = productos.find((producto) => producto.id === id);
 
   return (
@@ -67,7 +19,7 @@ export const CardDetalle = () => {
         <Box
           sx={{
             display: 'flex',
-            flexDirection: { xs: 'column', md: 'row' }, // Cambia la dirección de flex en pantallas pequeñas
+            flexDirection: { xs: 'column', md: 'row' },
             width: { xs: 350, md: 800 },
             height: { md: 400 },
             margin: '20px auto',
@@ -84,11 +36,11 @@ export const CardDetalle = () => {
             src={producto.image}
             alt={producto.name}
             style={{
-              maxWidth: '320px', // Asegura que la imagen no sea más ancha que su contenedor
+              maxWidth: '320px',
               height: 'auto',
               borderRadius: '10px',
-              marginBottom: { xs: '20px', md: '0' }, // Añade margen inferior en pantallas pequeñas
-              marginRight: { md: '20px' }, // Añade margen derecho en pantallas medianas y mayores
+              marginBottom: { xs: '20px', md: '0' },
+              marginRight: { md: '20px' },
             }}
           />
           <Box
@@ -97,9 +49,10 @@ export const CardDetalle = () => {
               display: 'flex',
               flexDirection: 'column',
               justifyContent: 'center',
-              textAlign: 'center', // Centra el texto en pantallas pequeñas
+              textAlign: 'center',
             }}
           >
+            <Button onClick={() => navigate('/')}>volver</Button>
             <Typography variant="h6" sx={{ mb: 1, color: 'white' }}>
               Detalles del producto
             </Typography>
