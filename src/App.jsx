@@ -1,7 +1,18 @@
-import "./App.css";
+import './App.css';
+
+import { Footer } from './layout/Footer';
+import { Header } from './layout/Header';
+import { Main } from './layout/Main';
 
 function App() {
-  return <></>;
-}
+  return (
+    <>
+      <Header />
 
+      <Main />
+
+      <Footer />
+    </>
+  );
+}
 export default App;
