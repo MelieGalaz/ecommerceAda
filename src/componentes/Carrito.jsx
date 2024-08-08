@@ -10,7 +10,8 @@ import { ContadorProducto } from './ContadorProducto';
 import fondoCardCarrito from '../assets/fondoCardCarrito.avif';
 
 export const Carrito = ({ state, toggleDrawer }) => {
-  const { carrito, EliminarUnProducto } = useContext(CarritoContext);
+  const { carrito, EliminarUnProducto, calcularSubTotal, subtotal } =
+    useContext(CarritoContext);
   const navigate = useNavigate();
 
   return (
@@ -24,7 +25,8 @@ export const Carrito = ({ state, toggleDrawer }) => {
         sx={{
           width: 300,
           height: '100%',
-          backgroundColor: '#51074d',
+          backgroundColor: '#590287',
+          overflowY: 'scroll',
         }}
         role="presentation"
         onClick={(event) => event.stopPropagation()}
@@ -79,6 +81,15 @@ export const Carrito = ({ state, toggleDrawer }) => {
                     Precio: $ {producto.precio}
                   </Typography>
                   <ContadorProducto key={producto.id} producto={producto} />
+                  <Typography
+                    sx={{
+                      textAlign: 'center',
+                      color: 'white',
+                      fontWeight: 500,
+                    }}
+                  >
+                    Subtotal: ${calcularSubTotal(producto)}
+                  </Typography>
                   <Button
                     onClick={() => EliminarUnProducto(producto)}
                     sx={{
@@ -98,7 +109,10 @@ export const Carrito = ({ state, toggleDrawer }) => {
         )}
       </Box>
       {carrito.length > 0 && (
-        <Button onClick={() => navigate('Login')}>Comprar</Button>
+        <Box>
+          <Typography>Subtotal: $ {subtotal} </Typography>
+          <Button onClick={() => navigate('Login')}>Comprar</Button>
+        </Box>
       )}
     </Drawer>
   );

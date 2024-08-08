@@ -15,16 +15,17 @@ import { GiHamburgerMenu } from 'react-icons/gi';
 import { BiCartDownload } from 'react-icons/bi';
 import { IoIosSearch } from 'react-icons/io';
 import { useState } from 'react';
-
+import fondoNav from '../assets/fondonav.avif';
 import { Carrito } from './Carrito';
-
+import { CarritoContext } from '../context/CarritoContex';
+import { useContext } from 'react';
 const pages = ['Productos', 'home'];
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 
 export const NavBar = () => {
   const [anchorElNav, setAnchorElNav] = useState(null);
   const [anchorElUser, setAnchorElUser] = useState(null);
-
+  const { cantidad } = useContext(CarritoContext);
   const [state, setState] = useState({
     right: false,
   });
@@ -86,7 +87,17 @@ export const NavBar = () => {
   }));
 
   return (
-    <AppBar position="static" sx={{ backgroundColor: '#51074d' }}>
+    <AppBar
+      position="static"
+      sx={{
+        backgroundColor: 'transparent',
+
+        backgroundImage: `url(${fondoNav})`,
+        backgroundSize: 'cover',
+        backgroundPosition: 'bottom',
+        backgroundRepeat: 'no-repeat',
+      }}
+    >
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           <Button sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
@@ -177,10 +188,20 @@ export const NavBar = () => {
           </Box>
 
           <Box sx={{ flexGrow: 0, display: 'flex', alignItems: 'center' }}>
-            <BiCartDownload
-              style={{ fontSize: '30px' }}
-              onClick={toggleDrawer('right', true)}
-            />
+            <Box sx={{ display: 'flex' }}>
+              <BiCartDownload
+                style={{ fontSize: '30px' }}
+                onClick={toggleDrawer('right', true)}
+              />
+              <span
+                style={{
+                  color: '#e6a2f6',
+                  textShadow: '4px 4px 8px rgba(0, 0, 0, 0.8)',
+                }}
+              >
+                {cantidad > 0 ? cantidad : ''}
+              </span>
+            </Box>
             <Carrito state={state} toggleDrawer={toggleDrawer} />
             <Tooltip title="Open settings">
               <Button onClick={handleOpenUserMenu} sx={{ p: 0 }}>

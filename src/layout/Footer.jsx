@@ -1,6 +1,7 @@
 import AppBar from '@mui/material/AppBar';
 import { Typography, Container } from '@mui/material';
 import { FaGithub, FaLinkedin } from 'react-icons/fa';
+import fondoNav from '../assets/fondonav.avif';
 export const Footer = () => {
   return (
     <AppBar
@@ -8,8 +9,10 @@ export const Footer = () => {
       sx={{
         width: '100%',
         textAlign: 'center',
-
-        backgroundColor: '#51074d',
+        backgroundImage: `url(${fondoNav})`,
+        backgroundSize: 'cover',
+        backgroundPosition: 'bottom',
+        backgroundRepeat: 'no-repeat',
       }}
     >
       <Typography variant="subtitle1" color="white" component="div">

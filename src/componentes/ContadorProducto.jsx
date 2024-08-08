@@ -4,14 +4,16 @@ import { AiOutlineMinus } from 'react-icons/ai';
 import { IoMdAdd } from 'react-icons/io';
 import { CarritoContext } from '../context/CarritoContex';
 export const ContadorProducto = ({ producto }) => {
-  const { sumarCantidad } = useContext(CarritoContext);
+  const { sumarCantidad, restarCantidad } = useContext(CarritoContext);
   const handleSumar = () => {
     sumarCantidad(producto.id);
   };
-
+  const handleRestar = () => {
+    restarCantidad(producto.id);
+  };
   return (
     <Box sx={{ display: 'flex', alignItems: 'center' }}>
-      <IconButton sx={{ color: 'white' }}>
+      <IconButton onClick={handleRestar} sx={{ color: 'white' }}>
         <AiOutlineMinus />
       </IconButton>
 

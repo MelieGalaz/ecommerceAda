@@ -1,10 +1,29 @@
-import { createContext, useState } from 'react';
+import { createContext, useState, useEffect } from 'react';
 
 export const CarritoContext = createContext();
 
 export const CarritoProvider = ({ children }) => {
   const [carrito, setCarrito] = useState([]);
   const [cantidad, setCantidad] = useState(1);
+  const [subtotal, setSubtotal] = useState(0);
+
+  useEffect(() => {
+    const initialSubtotal = carrito.reduce((acc, producto) => {
+      return (
+        acc + (producto.cantidad > 0 ? producto.precio * producto.cantidad : 0)
+      );
+    }, 0);
+    setSubtotal(initialSubtotal);
+    console.log(initialSubtotal);
+  }, [carrito]);
+
+  useEffect(() => {
+    const initialSubtotal = carrito.reduce((acc, producto) => {
+      return acc + (producto.cantidad > 0 ? producto.cantidad : 0);
+    }, 0);
+    setCantidad(initialSubtotal);
+    console.log(initialSubtotal);
+  }, [carrito]);
 
   const agregarAlCarrito = (producto) => {
     const productoExiste = carrito.find((item) => item.id === producto.id);
@@ -37,6 +56,30 @@ export const CarritoProvider = ({ children }) => {
     );
     setCarrito(nuevoCarrito);
   };
+  const restarCantidad = (productoId) => {
+    const nuevoCarrito = carrito.map((producto) => {
+      if (producto.id === productoId) {
+        const nuevaCantidad = (producto.cantidad || 0) - 1;
+        return {
+          ...producto,
+          cantidad: nuevaCantidad > 0 ? nuevaCantidad : 1,
+        };
+      }
+      return producto;
+    });
+    setCarrito(nuevoCarrito);
+  };
+  const calcularSubTotal = (producto) => {
+    return producto.precio * producto.cantidad;
+  };
+
+  // const calcularTotal = () => {
+  //   return carrito.reduce(
+  //     (total, producto) => total + calcularSubTotal(producto),
+  //     0
+  //   );
+  // };
+
   return (
     <CarritoContext.Provider
       value={{
@@ -45,6 +88,9 @@ export const CarritoProvider = ({ children }) => {
         EliminarUnProducto,
         sumarCantidad,
         cantidad,
+        restarCantidad,
+        calcularSubTotal,
+        subtotal,
       }}
     >
       {children}
