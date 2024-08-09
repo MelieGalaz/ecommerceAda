@@ -4,10 +4,11 @@ import { FaGithub, FaLinkedin } from 'react-icons/fa';
 import fondoNav from '../assets/fondonav.avif';
 export const Footer = () => {
   return (
-    <AppBar
+    <Container
+      as="footer"
       position="static"
       sx={{
-        width: '100%',
+        minWidth: '100%',
         textAlign: 'center',
         backgroundImage: `url(${fondoNav})`,
         backgroundSize: 'cover',
@@ -26,6 +27,6 @@ export const Footer = () => {
           <FaLinkedin />
         </a>
       </Container>
-    </AppBar>
+    </Container>
   );
 };

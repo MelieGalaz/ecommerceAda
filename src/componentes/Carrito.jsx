@@ -8,7 +8,7 @@ import { CarritoContext } from '../context/CarritoContex';
 import { Typography } from '@mui/material';
 import { ContadorProducto } from './ContadorProducto';
 import fondoCardCarrito from '../assets/fondoCardCarrito.avif';
-
+import { MdClose } from 'react-icons/md';
 export const Carrito = ({ state, toggleDrawer }) => {
   const { carrito, EliminarUnProducto, calcularSubTotal, subtotal } =
     useContext(CarritoContext);
@@ -32,6 +32,8 @@ export const Carrito = ({ state, toggleDrawer }) => {
         onClick={(event) => event.stopPropagation()}
         onKeyDown={(event) => event.stopPropagation()}
       >
+        <MdClose onClick={toggleDrawer('right', false)} />
+        {/* <Button onClick={toggleDrawer('right', false)}>hola</Button> */}
         {carrito.length === 0 ? (
           <Typography>No hay productos en el carrito</Typography>
         ) : (

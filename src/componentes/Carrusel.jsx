@@ -9,22 +9,22 @@ import joyas4 from '../assets/joyas4.jpg';
 import joyas3 from '../assets/joyas3.jpg';
 
 export const Carrusel = () => {
-  // const settings = {
-  //   dots: true,
-  //   infinite: true,
-  //   speed: 500,
-  //   slidesToShow: 1,
-  //   slidesToScroll: 1,
-  //   arrows: false, // Oculta las flechas
-  //   autoplay: true, // Reproduce automáticamente
-  //   autoplaySpeed: 3000, // Velocidad de cambio de diapositiva
-  //   fade: true, // Transición de desvanecimiento
-  //   cssEase: 'ease-in-out',
-  // };
+  const settings = {
+    dots: true,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    arrows: false, // Oculta las flechas
+    autoplay: true, // Reproduce automáticamente
+    autoplaySpeed: 3000, // Velocidad de cambio de diapositiva
+    fade: true, // Transición de desvanecimiento
+    cssEase: 'ease-in-out',
+  };
 
   return (
     <Box className="carrusel-container">
-      <Slider>
+      <Slider {...settings}>
         <Box className="slide-item">
           <img src={joyas} alt="Carrito" />
           <Box
