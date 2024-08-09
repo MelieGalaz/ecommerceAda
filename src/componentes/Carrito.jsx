@@ -5,13 +5,16 @@ import Drawer from '@mui/material/Drawer';
 import Button from '@mui/material/Button';
 import { useNavigate } from 'react-router';
 import { CarritoContext } from '../context/CarritoContex';
+import { FirebaseContext } from '../context/FirebaseContext';
 import { Typography } from '@mui/material';
 import { ContadorProducto } from './ContadorProducto';
 import fondoCardCarrito from '../assets/fondoCardCarrito.avif';
 import { MdClose } from 'react-icons/md';
+
 export const Carrito = ({ state, toggleDrawer }) => {
   const { carrito, EliminarUnProducto, calcularSubTotal, subtotal } =
     useContext(CarritoContext);
+  const { user } = useContext(FirebaseContext);
   const navigate = useNavigate();
 
   return (
@@ -113,7 +116,13 @@ export const Carrito = ({ state, toggleDrawer }) => {
       {carrito.length > 0 && (
         <Box>
           <Typography>Subtotal: $ {subtotal} </Typography>
-          <Button onClick={() => navigate('Login')}>Comprar</Button>
+          <Button
+            onClick={
+              user ? () => navigate('/Checkout') : () => navigate('/Login')
+            }
+          >
+            Comprar
+          </Button>
         </Box>
       )}
     </Drawer>

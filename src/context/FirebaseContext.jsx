@@ -1,5 +1,12 @@
 import { createContext, useEffect, useState } from 'react';
-import { collection, onSnapshot, doc, getDoc } from 'firebase/firestore';
+import {
+  collection,
+  onSnapshot,
+  doc,
+  getDoc,
+  updateDoc,
+  arrayUnion,
+} from 'firebase/firestore';
 import { db } from '../../firebase';
 import { getAuth, onAuthStateChanged } from 'firebase/auth';
 
@@ -35,7 +42,25 @@ export const FirebaseProvider = ({ children }) => {
       console.log(err);
     }
   };
-
+  const finalizarCompra = async (carrito, subtotal) => {
+    if (user && user.uid) {
+      try {
+        const userDocRef = doc(db, 'users', user.uid);
+        await updateDoc(userDocRef, {
+          orders: arrayUnion({
+            carrito: [...carrito],
+            fecha: new Date(),
+            total: subtotal,
+          }),
+        });
+        console.log('Compra finalizada y guardada en Firestore.');
+      } catch (error) {
+        console.error('Error al finalizar la compra:', error);
+      }
+    } else {
+      console.error('Usuario no autenticado.');
+    }
+  };
   useEffect(() => {
     const isAuth = () => {
       onAuthStateChanged(auth, async (user) => {
@@ -43,7 +68,7 @@ export const FirebaseProvider = ({ children }) => {
           if (user) {
             const uid = user.uid;
             const userInfo = await getUserInfo(uid);
-            setUser(userInfo);
+            setUser({ user, userInfo }); // Guardar toda la información del usuario incluyendo `uid`
           } else {
             setUser(null);
           }
@@ -55,10 +80,9 @@ export const FirebaseProvider = ({ children }) => {
     };
     isAuth();
   }, []);
-
   return (
     <FirebaseContext.Provider
-      value={{ productos, setProductos, user, setUser }}
+      value={{ productos, setProductos, user, setUser, finalizarCompra }}
     >
       {children}
     </FirebaseContext.Provider>

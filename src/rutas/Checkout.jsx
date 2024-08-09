@@ -2,10 +2,18 @@ import { useContext } from 'react';
 import { CarritoContext } from '../context/CarritoContex';
 import { Box, Typography, Button } from '@mui/material';
 import { useNavigate } from 'react-router';
+import { FirebaseContext } from '../context/FirebaseContext';
 
-export const CheckIn = () => {
+export const Checkout = () => {
   const { carrito, calcularSubTotal, subtotal } = useContext(CarritoContext);
+  const { finalizarCompra } = useContext(FirebaseContext);
   const navigate = useNavigate();
+  console.log(carrito);
+
+  const handleFinalizarCompra = () => {
+    finalizarCompra(carrito, subtotal); // Llama a la función para finalizar la compra
+    navigate('/'); // Redirige a la página principal
+  };
   return (
     <Box sx={{ backgroundColor: 'white' }}>
       <Button onClick={() => navigate('/')}>Regresar</Button>
@@ -39,6 +47,7 @@ export const CheckIn = () => {
         </Box>
       ))}
       <Typography>Total: $ {subtotal} </Typography>
+      <Button onClick={handleFinalizarCompra}>Finalizar Compra</Button>
     </Box>
   );
 };
