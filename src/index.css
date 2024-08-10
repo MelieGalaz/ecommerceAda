@@ -10,6 +10,7 @@
   width: 100%;
   height: auto;
 }
+
 .carrusel-container {
   width: 100%;
   max-width: 1536px;
@@ -20,8 +21,7 @@
 
 .slide-item img {
   width: 100%;
-  height: auto;
-  max-height: 400px;
+  height: 400px;
   object-fit: cover;
 }
 
@@ -41,12 +41,23 @@
 .slide-item {
   position: relative;
 }
+
 .slide-text {
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  color: white;
+  color: #66129b;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+.icon-close {
+  font-size: 25px;
   text-align: center;
+  font-weight: 700;
+  color: #66129b;
+  cursor: pointer;
+}
+
+.icon-close:hover {
+  color: #9b12a6;
 }

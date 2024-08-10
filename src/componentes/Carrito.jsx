@@ -35,10 +35,15 @@ export const Carrito = ({ state, toggleDrawer }) => {
         onClick={(event) => event.stopPropagation()}
         onKeyDown={(event) => event.stopPropagation()}
       >
-        <MdClose onClick={toggleDrawer('right', false)} />
-        {/* <Button onClick={toggleDrawer('right', false)}>hola</Button> */}
+        <MdClose
+          onClick={toggleDrawer('right', false)}
+          style={{ color: 'white', textAlign: 'center', fontSize: 25 }}
+        />
+
         {carrito.length === 0 ? (
-          <Typography>No hay productos en el carrito</Typography>
+          <Typography variant="h6" sx={{ color: 'white', textAlign: 'center' }}>
+            No hay productos en el carrito
+          </Typography>
         ) : (
           carrito.map((producto) => (
             <Box

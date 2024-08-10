@@ -5,14 +5,30 @@ import { useNavigate } from 'react-router';
 import { FirebaseContext } from '../context/FirebaseContext';
 
 export const Checkout = () => {
-  const { carrito, calcularSubTotal, subtotal } = useContext(CarritoContext);
-  const { finalizarCompra } = useContext(FirebaseContext);
+  const { carrito, calcularSubTotal, subtotal, setCarrito } =
+    useContext(CarritoContext);
+  const { finalizarCompra, user } = useContext(FirebaseContext);
   const navigate = useNavigate();
-  console.log(carrito);
+  console.log(carrito, user);
 
-  const handleFinalizarCompra = () => {
-    finalizarCompra(carrito, subtotal); // Llama a la función para finalizar la compra
-    navigate('/'); // Redirige a la página principal
+  //   const handleFinalizarCompra = () => {
+  //     finalizarCompra(carrito, subtotal);
+
+  //     setCarrito([]);
+
+  //     navigate('/');
+  //   };
+  const handleFinalizarCompra = async () => {
+    if (!user) {
+      console.log('Usuario no autenticado');
+      navigate('/Login'); // Redirige al usuario a la página de inicio de sesión
+      return;
+    }
+
+    await finalizarCompra(carrito, subtotal);
+
+    setCarrito([]);
+    navigate('/Agradecimiento');
   };
   return (
     <Box sx={{ backgroundColor: 'white' }}>

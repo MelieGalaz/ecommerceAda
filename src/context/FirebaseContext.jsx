@@ -61,14 +61,33 @@ export const FirebaseProvider = ({ children }) => {
       console.error('Usuario no autenticado.');
     }
   };
+  // useEffect(() => {
+  //   const isAuth = () => {
+  //     onAuthStateChanged(auth, async (user) => {
+  //       try {
+  //         if (user) {
+  //           const uid = user.uid;
+  //           const userInfo = await getUserInfo(uid);
+  //           setUser({ ...user, ...userInfo }); // Guardar toda la información del usuario incluyendo `uid`
+  //         } else {
+  //           setUser(null);
+  //         }
+  //       } catch (error) {
+  //         setUser(null);
+  //         console.error('Error during authentication:', error);
+  //       }
+  //     });
+  //   };
+  //   isAuth();
+  // }, []);
   useEffect(() => {
     const isAuth = () => {
-      onAuthStateChanged(auth, async (user) => {
+      const unsubscribe = onAuthStateChanged(auth, async (user) => {
         try {
           if (user) {
             const uid = user.uid;
             const userInfo = await getUserInfo(uid);
-            setUser({ user, userInfo }); // Guardar toda la información del usuario incluyendo `uid`
+            setUser({ ...user, ...userInfo });
           } else {
             setUser(null);
           }
@@ -77,9 +96,11 @@ export const FirebaseProvider = ({ children }) => {
           console.error('Error during authentication:', error);
         }
       });
+      return () => unsubscribe(); // Cleanup on component unmount
     };
     isAuth();
-  }, []);
+  }, [auth]);
+
   return (
     <FirebaseContext.Provider
       value={{ productos, setProductos, user, setUser, finalizarCompra }}

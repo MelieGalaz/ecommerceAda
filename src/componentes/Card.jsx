@@ -86,9 +86,9 @@ export const Card = () => {
               onClick={() => agregarAlCarrito(producto)}
               sx={{
                 color: 'white',
-                borderRadius: 5,
+                borderRadius: 2,
                 backgroundColor: '#691b76',
-                padding: '3px 10px',
+                padding: '3px 15px',
                 fontSize: '13px',
               }}
             >
