@@ -11,25 +11,25 @@ export const Checkout = () => {
   const navigate = useNavigate();
   console.log(carrito, user);
 
-  //   const handleFinalizarCompra = () => {
-  //     finalizarCompra(carrito, subtotal);
-
-  //     setCarrito([]);
-
-  //     navigate('/');
-  //   };
-  const handleFinalizarCompra = async () => {
-    if (!user) {
-      console.log('Usuario no autenticado');
-      navigate('/Login'); // Redirige al usuario a la página de inicio de sesión
-      return;
-    }
-
-    await finalizarCompra(carrito, subtotal);
+  const handleFinalizarCompra = () => {
+    finalizarCompra(carrito, subtotal);
 
     setCarrito([]);
-    navigate('/Agradecimiento');
+
+    navigate('/');
   };
+  // const handleFinalizarCompra = async () => {
+  //   if (!user) {
+  //     console.log('Usuario no autenticado');
+  //     navigate('/Login'); // Redirige al usuario a la página de inicio de sesión
+  //     return;
+  //   }
+
+  //   await finalizarCompra(carrito, subtotal);
+
+  //   setCarrito([]);
+  //   navigate('/Agradecimiento');
+  // };
   return (
     <Box sx={{ backgroundColor: 'white' }}>
       <Button onClick={() => navigate('/')}>Regresar</Button>

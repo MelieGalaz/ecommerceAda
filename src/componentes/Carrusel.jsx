@@ -108,7 +108,7 @@ export const Carrusel = () => {
             <Typography
               sx={{
                 fontSize: '1.5rem',
-                fontWeight: 800,
+                fontWeight: '800',
                 textAlign: 'center',
               }}
             >
@@ -118,7 +118,6 @@ export const Carrusel = () => {
                   fontWeight: 'normal',
                   fontSize: '1.2rem',
                   paddingInline: 20,
-                  fontWeight: 500,
                 }}
               >
                 Hasta
@@ -129,7 +128,7 @@ export const Carrusel = () => {
               variant="body1"
               sx={{
                 fontSize: '1.1rem',
-                fontWeight: 600,
+                fontWeight: '500',
                 textAlign: 'center',
               }}
             >
@@ -151,7 +150,7 @@ export const Carrusel = () => {
             <Typography
               sx={{
                 fontSize: '1.5rem',
-                fontWeight: 800,
+                fontWeight: '500',
                 textAlign: 'center',
               }}
             >
@@ -159,10 +158,9 @@ export const Carrusel = () => {
             </Typography>
             <Typography
               style={{
-                fontWeight: 'normal',
                 fontSize: '1.2rem',
                 textAlign: 'center',
-                fontWeight: 500,
+                fontWeight: '500',
               }}
             >
               En la segunda pieza de joyería de igual o menor valor.
@@ -174,7 +172,7 @@ export const Carrusel = () => {
           <Box
             className="slide-text"
             sx={{
-              height: 300,
+              height: '300',
               display: 'flex',
               flexDirection: 'column',
               justifyContent: 'space-between',
@@ -184,7 +182,7 @@ export const Carrusel = () => {
               variant="h4"
               sx={{
                 fontSize: '1.5rem',
-                fontWeight: 800,
+                fontWeight: '800',
                 textAlign: 'center',
               }}
             >
@@ -193,10 +191,9 @@ export const Carrusel = () => {
             <Typography
               variant="body1"
               style={{
-                fontWeight: 'normal',
                 fontSize: '1.2rem',
                 textAlign: 'center',
-                fontWeight: 500,
+                fontWeight: '500',
               }}
             >
               Nuestros aros están diseñados para complementar tu estilo con un
