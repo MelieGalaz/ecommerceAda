@@ -136,13 +136,13 @@ export const NavBar = () => {
         backgroundRepeat: 'no-repeat',
       }}
     >
-      <Container maxWidth="xl">
+      <Container sx={{ maxWidth: '1200px' }}>
         <Toolbar disableGutters>
           <Typography
             variant="h5"
             sx={{
               mr: 2,
-              display: { xs: 'flex', md: 'none' },
+              display: { xs: 'flex' },
               flexGrow: 1,
               fontFamily: 'monospace',
               fontWeight: 700,
@@ -154,7 +154,7 @@ export const NavBar = () => {
             BOUTIQUE
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
-            {pages.map((page) => (
+            {/* {pages.map((page) => (
               <Button
                 key={page}
                 onClick={handleCloseNavMenu}
@@ -162,14 +162,7 @@ export const NavBar = () => {
               >
                 {page}
               </Button>
-            ))}
-            <Search sx={{ display: 'flex', alignItems: 'center' }}>
-              <IoIosSearch style={{ fontSize: '30px' }} />
-              <StyledInputBase
-                placeholder="Buscar…"
-                inputProps={{ 'aria-label': 'buscar' }}
-              />
-            </Search>
+            ))} */}
           </Box>
 
           <Box

@@ -3,30 +3,53 @@ import { FirebaseContext } from '../context/FirebaseContext';
 import { Box, Typography } from '@mui/material';
 import { IoMdClose } from 'react-icons/io';
 import { useNavigate } from 'react-router';
+import fondoCheck from '../assets/fondoCheck.webp';
 export const OrdenesHistorial = () => {
   const { user } = useContext(FirebaseContext);
   const navigate = useNavigate();
+
   return (
     <>
       <Box>
-        <IoMdClose style={{ color: 'white' }} onClick={() => navigate('/')} />
+        <IoMdClose onClick={() => navigate('/')} />
         {user?.orders?.map((order, index) => (
-          <Box sx={{ border: 'white 2px solid' }} key={index}>
-            <Typography sx={{ color: 'white' }}>{order.total}</Typography>
+          <Box
+            key={index}
+            sx={{
+              backgroundColor: 'white',
+
+              margin: { xs: '10px', sm: '20px auto' },
+              padding: '5px',
+              borderRadius: 5,
+              display: 'flex',
+              flexDirection: 'column',
+              gap: 1,
+              width: { sx: 0, sm: '100%' },
+              maxWidth: 800,
+              borderWidth: '10px',
+              borderStyle: 'solid',
+              borderImage: `url(${fondoCheck}) 10`,
+            }}
+          >
+            <Typography>{order.total}</Typography>
+            <Typography>{order.fecha}</Typography>
             {order?.carrito?.map((item, index) => (
               <Box key={index}>
                 <Typography sx={{ color: 'white' }}>
                   {item.descripcion}
                 </Typography>
-                <Typography sx={{ color: 'white' }}>{item.cantidad}</Typography>
-                <Typography sx={{ color: 'white' }}>{item.nombre}</Typography>
-                <Typography sx={{ color: 'white' }}>{item.precio}</Typography>
+                <Typography>{item.cantidad}</Typography>
+                <Typography>{item.nombre}</Typography>
+                <Typography>{item.precio}</Typography>
                 <img
-                  style={{ width: '300px' }}
+                  width={'80px'}
+                  style={{
+                    borderRadius: 50,
+                    border: '5px solid #51074d',
+                  }}
                   src={item.image}
                   alt={item.nombre}
                 />
-                {/* <Typography sx={{color:'white'}}>{order.fecha}</Typography>  */}
               </Box>
             ))}
           </Box>
