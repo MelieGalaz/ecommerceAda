@@ -1,11 +1,23 @@
 import { createContext, useState, useEffect } from 'react';
+import { getAddedProducts, setCartLS } from '../localStorage';
 
 export const CarritoContext = createContext();
 
 export const CarritoProvider = ({ children }) => {
-  const [carrito, setCarrito] = useState([]);
+  const [carrito, setCarrito] = useState(getAddedProducts('carrito') || []);
   const [cantidad, setCantidad] = useState(1);
   const [subtotal, setSubtotal] = useState(0);
+
+  useEffect(() => {
+    setCartLS(JSON.stringify(carrito));
+    console.log('sin bucle');
+    const timeoutId = setTimeout(() => {
+      eliminarTodo();
+      console.log('Carrito borrado después de 9 segundos');
+    }, 86400000);
+
+    return () => clearTimeout(timeoutId);
+  }, [carrito]);
 
   useEffect(() => {
     const initialSubtotal = carrito.reduce((acc, producto) => {

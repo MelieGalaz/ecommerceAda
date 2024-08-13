@@ -45,12 +45,12 @@ export const Carrito = ({ state, toggleDrawer }) => {
           style={{ color: 'white', textAlign: 'center', fontSize: 25 }}
         />
         <Button onClick={eliminarTodo}>Vaciar carrito</Button>
-        {carrito.length === 0 ? (
+        {carrito?.length === 0 ? (
           <Typography variant="h6" sx={{ color: 'white', textAlign: 'center' }}>
             No hay productos en el carrito
           </Typography>
         ) : (
-          carrito.map((producto) => (
+          carrito?.map((producto) => (
             <Box
               key={producto.id}
               sx={{
