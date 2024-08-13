@@ -8,10 +8,11 @@ import { Checkout } from '../rutas/Checkout';
 import { useContext } from 'react';
 import { FirebaseContext } from '../context/FirebaseContext';
 import { Agradecimiento } from '../rutas/Agradecimiento';
+import { OrdenesHistorial } from '../rutas/OrdenesHistorial';
 
 export const Main = () => {
   const { user } = useContext(FirebaseContext);
-  console.log(user);
+
   return (
     <Routes>
       <Route path="/" element={<CardContenedor />} />
@@ -23,6 +24,7 @@ export const Main = () => {
         path="Checkout"
         element={user ? <Checkout /> : <Navigate to="/Login" />}
       />
+      <Route path="OrdenesHistorial" element={<OrdenesHistorial />} />
       <Route path="*" element={<NotFound />} />
     </Routes>
   );

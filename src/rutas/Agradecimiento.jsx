@@ -1,7 +1,7 @@
 import { Box, Button, Typography } from '@mui/material';
-import React from 'react';
+
 import { useNavigate } from 'react-router';
-// import { Carrusel } from '../componentes/Carrusel';
+
 import fondoCheck from '../assets/fondoCheck.webp';
 export const Agradecimiento = () => {
   const navigate = useNavigate();
@@ -75,7 +75,6 @@ export const Agradecimiento = () => {
           Aproveche nuestras promociones
         </Typography>
       </Box>
-      {/* <Carrusel /> */}
     </>
   );
 };

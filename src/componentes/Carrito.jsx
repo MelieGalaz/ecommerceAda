@@ -12,8 +12,13 @@ import fondoCardCarrito from '../assets/fondoCardCarrito.avif';
 import { MdClose } from 'react-icons/md';
 
 export const Carrito = ({ state, toggleDrawer }) => {
-  const { carrito, EliminarUnProducto, calcularSubTotal, subtotal } =
-    useContext(CarritoContext);
+  const {
+    carrito,
+    EliminarUnProducto,
+    calcularSubTotal,
+    subtotal,
+    eliminarTodo,
+  } = useContext(CarritoContext);
   const { user } = useContext(FirebaseContext);
   const navigate = useNavigate();
 
@@ -39,7 +44,7 @@ export const Carrito = ({ state, toggleDrawer }) => {
           onClick={toggleDrawer('right', false)}
           style={{ color: 'white', textAlign: 'center', fontSize: 25 }}
         />
-
+        <Button onClick={eliminarTodo}>Vaciar carrito</Button>
         {carrito.length === 0 ? (
           <Typography variant="h6" sx={{ color: 'white', textAlign: 'center' }}>
             No hay productos en el carrito

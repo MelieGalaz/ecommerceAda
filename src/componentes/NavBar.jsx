@@ -44,7 +44,7 @@ export const NavBar = () => {
         navigate('/Login');
         break;
       case 'Historial':
-        navigate('/account');
+        navigate('/OrdenesHistorial');
         break;
 
       case 'salir':

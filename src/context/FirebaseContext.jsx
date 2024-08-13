@@ -33,23 +33,27 @@ export const FirebaseProvider = ({ children }) => {
     getProductos();
   }, []);
 
-  const getUserInfo = async (uid) => {
-    try {
-      const docRef = doc(db, 'users', uid);
-      const document = await getDoc(docRef);
-      return document.data();
-    } catch (err) {
-      console.log(err);
-    }
-  };
+  // const getUserInfo = async (uid) => {
+  //   try {
+  //     const docRef = doc(db, 'users', uid);
+  //     const document = await getDoc(docRef);
+  //     return document.data();
+  //   } catch (err) {
+  //     console.log(err);
+  //   }
+  // };
+
   useEffect(() => {
     const isAuth = () => {
       onAuthStateChanged(auth, async (user) => {
         try {
           if (user) {
             const uid = user.uid;
-            const userInfo = await getUserInfo(uid);
-            setUser({ ...user, ...userInfo }); // Guardar toda la información del usuario incluyendo `uid`
+            const userDocRef = doc(db, 'users', uid);
+            onSnapshot(userDocRef, (doc) => {
+              const userInfo = doc.data();
+              setUser({ ...user, ...userInfo });
+            });
           } else {
             setUser(null);
           }

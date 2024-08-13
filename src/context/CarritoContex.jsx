@@ -72,7 +72,9 @@ export const CarritoProvider = ({ children }) => {
   const calcularSubTotal = (producto) => {
     return producto.precio * producto.cantidad;
   };
-
+  const eliminarTodo = () => {
+    setCarrito([]);
+  };
   return (
     <CarritoContext.Provider
       value={{
@@ -85,6 +87,7 @@ export const CarritoProvider = ({ children }) => {
         calcularSubTotal,
         subtotal,
         setCarrito,
+        eliminarTodo,
       }}
     >
       {children}
