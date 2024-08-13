@@ -149,6 +149,7 @@ import { doc, setDoc } from 'firebase/firestore';
 import { db } from '../../firebase';
 import { useState } from 'react';
 import { useNavigate } from 'react-router';
+import fondoCheck from '../assets/fondoCheck.webp';
 
 const validationSchema = yup.object({
   nombre: yup.string('Enter your name').required('Name is required'),
@@ -213,6 +214,9 @@ export const Registrar = () => {
         gap: 1,
         width: { sx: 0, sm: '100%' },
         maxWidth: 700,
+        borderWidth: '10px',
+        borderStyle: 'solid',
+        borderImage: `url(${fondoCheck}) 10`,
       }}
     >
       <IoMdClose onClick={() => navigate('/')} className="icon-close" />

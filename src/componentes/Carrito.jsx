@@ -104,7 +104,7 @@ export const Carrito = ({ state, toggleDrawer }) => {
                     onClick={() => EliminarUnProducto(producto)}
                     sx={{
                       color: 'white',
-                      borderRadius: 5,
+                      borderRadius: 2,
                       backgroundColor: '#691b76',
                       padding: '3px 10px',
                       fontSize: '13px',
@@ -119,9 +119,23 @@ export const Carrito = ({ state, toggleDrawer }) => {
         )}
       </Box>
       {carrito.length > 0 && (
-        <Box>
-          <Typography>Subtotal: $ {subtotal} </Typography>
+        <Box sx={{ backgroundColor: '#590287' }}>
+          <Typography
+            sx={{ color: 'white', fontSize: 18, textAlign: 'center' }}
+          >
+            Subtotal: $ {subtotal}{' '}
+          </Typography>
           <Button
+            sx={{
+              color: 'white',
+              borderRadius: 2,
+              backgroundColor: '#cc97d4',
+              padding: '3px 16px',
+              fontSize: '15px',
+              fontWeight: '700',
+              margin: '15px auto',
+              display: 'block',
+            }}
             onClick={
               user ? () => navigate('/Checkout') : () => navigate('/Login')
             }

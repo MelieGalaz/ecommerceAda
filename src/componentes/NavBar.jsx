@@ -25,13 +25,14 @@ import { useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { TbLogout } from 'react-icons/tb';
 const pages = ['Productos', 'home'];
-const settings = ['Iniciar Sesión', 'Historial', 'salir'];
+const settings = ['Historial', 'salir'];
 
 export const NavBar = () => {
   const [anchorElNav, setAnchorElNav] = useState(null);
   const [anchorElUser, setAnchorElUser] = useState(null);
   const { cantidad } = useContext(CarritoContext);
   const { user } = useContext(FirebaseContext);
+
   const [state, setState] = useState({
     right: false,
   });
@@ -42,13 +43,11 @@ export const NavBar = () => {
       case 'Iniciar Sesión':
         navigate('/Login');
         break;
-      case 'Account':
+      case 'Historial':
         navigate('/account');
         break;
-      case 'Dashboard':
-        navigate('/dashboard');
-        break;
-      case 'Logout':
+
+      case 'salir':
         cerrarSesion();
 
         console.log('Logging out...');
@@ -139,61 +138,8 @@ export const NavBar = () => {
     >
       <Container maxWidth="xl">
         <Toolbar disableGutters>
-          <Button sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
-          <Typography
-            variant="h6"
-            noWrap
-            component="a"
-            href="#app-bar-with-responsive-menu"
-            sx={{
-              mr: 2,
-              display: { xs: 'none', md: 'flex' },
-              fontFamily: 'monospace',
-              fontWeight: 700,
-              letterSpacing: '.3rem',
-              color: 'inherit',
-              textDecoration: 'none',
-            }}
-          >
-            BOUTIQUE
-          </Typography>
-
-          <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
-            <GiHamburgerMenu
-              style={{ fontSize: '25px' }}
-              onClick={handleOpenNavMenu}
-            />
-            <Menu
-              id="menu-appbar"
-              anchorEl={anchorElNav}
-              anchorOrigin={{
-                vertical: 'bottom',
-                horizontal: 'left',
-              }}
-              keepMounted
-              transformOrigin={{
-                vertical: 'top',
-                horizontal: 'left',
-              }}
-              open={Boolean(anchorElNav)}
-              onClose={handleCloseNavMenu}
-              sx={{
-                display: { xs: 'block', md: 'none' },
-              }}
-            >
-              {pages.map((page) => (
-                <MenuItem key={page} onClick={handleCloseNavMenu}>
-                  <Typography textAlign="center">{page}</Typography>
-                </MenuItem>
-              ))}
-            </Menu>
-          </Box>
-          <Button sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />
           <Typography
             variant="h5"
-            noWrap
-            component="a"
-            href="#app-bar-with-responsive-menu"
             sx={{
               mr: 2,
               display: { xs: 'flex', md: 'none' },
@@ -226,7 +172,14 @@ export const NavBar = () => {
             </Search>
           </Box>
 
-          <Box sx={{ flexGrow: 0, display: 'flex', alignItems: 'center' }}>
+          <Box
+            sx={{
+              flexGrow: 0,
+              display: 'flex',
+              alignItems: 'center',
+              gap: '5px',
+            }}
+          >
             <Box sx={{ display: 'flex' }}>
               <BiCartDownload
                 style={{ fontSize: '30px' }}
@@ -243,19 +196,35 @@ export const NavBar = () => {
             </Box>
             <Carrito state={state} toggleDrawer={toggleDrawer} />
             <Tooltip title="Open settings">
-              <Button onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                {/* <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" /> */}
-                <FaUser style={{ fontSize: 22, color: 'white' }} />
-                {user ? (
-                  <Typography variant="p" sx={{ color: 'white' }}>
+              {user ? (
+                <Button
+                  onClick={handleOpenUserMenu}
+                  sx={{ p: 0, display: 'flex', flexDirection: 'column' }}
+                >
+                  <FaUser style={{ fontSize: '23px', color: 'white' }} />
+                  <Typography
+                    sx={{ color: 'white', fontSize: 10, textAlign: 'center' }}
+                  >
                     {user.username}
                   </Typography>
-                ) : (
-                  <Typography sx={{ color: 'white' }}>
+                </Button>
+              ) : (
+                <Button
+                  onClick={() => navigate('/Login')}
+                  sx={{
+                    display: 'flex',
+                    flexDirection: 'column',
+                    padding: '0',
+                  }}
+                >
+                  <FaUser style={{ fontSize: '23px', color: 'white' }} />
+                  <Typography
+                    sx={{ color: 'white', fontSize: 10, textAlign: 'center' }}
+                  >
                     Iniciar Sesión
                   </Typography>
-                )}
-              </Button>
+                </Button>
+              )}
             </Tooltip>
             <Menu
               sx={{ mt: '45px' }}
@@ -282,13 +251,13 @@ export const NavBar = () => {
                 </MenuItem>
               ))}
             </Menu>
-            <Tooltip title="Cerrar Sesión">
+            {/* <Tooltip title="Cerrar Sesión">
               <Box>
                 <Button sx={{ p: 0 }} onClick={cerrarSesion}>
                   <TbLogout style={{ fontSize: '27px', color: '#ae39b1' }} />
                 </Button>
               </Box>
-            </Tooltip>
+            </Tooltip> */}
           </Box>
         </Toolbar>
       </Container>

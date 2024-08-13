@@ -7,7 +7,7 @@ import { CardDetalle } from '../rutas/CardDetalle';
 import { Checkout } from '../rutas/Checkout';
 import { useContext } from 'react';
 import { FirebaseContext } from '../context/FirebaseContext';
-// import { Agradecimiento } from '../rutas/Agradecimiento';
+import { Agradecimiento } from '../rutas/Agradecimiento';
 
 export const Main = () => {
   const { user } = useContext(FirebaseContext);
@@ -16,7 +16,7 @@ export const Main = () => {
     <Routes>
       <Route path="/" element={<CardContenedor />} />
       <Route path="Login" element={<Login />} />
-      {/* <Route path="Agradecimiento" element={<Agradecimiento />} /> */}
+      <Route path="Agradecimiento" element={<Agradecimiento />} />
       <Route path="Registrar" element={<Registrar />} />
       <Route path="CardDetalle/:id" element={<CardDetalle />} />
       <Route

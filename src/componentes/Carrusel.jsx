@@ -172,7 +172,7 @@ export const Carrusel = () => {
           <Box
             className="slide-text"
             sx={{
-              height: '300',
+              height: 300,
               display: 'flex',
               flexDirection: 'column',
               justifyContent: 'space-between',

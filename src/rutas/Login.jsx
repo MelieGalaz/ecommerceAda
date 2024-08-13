@@ -18,7 +18,8 @@ import { IoMdClose } from 'react-icons/io';
 import { useState } from 'react';
 import { useNavigate } from 'react-router';
 import { FirebaseContext } from '../context/FirebaseContext';
-
+import { CarritoContext } from '../context/CarritoContex';
+import fondoCheck from '../assets/fondoCheck.webp';
 const validationSchema = yup.object({
   email: yup
     .string()
@@ -32,6 +33,7 @@ const validationSchema = yup.object({
 
 export const Login = () => {
   const { user, setUser } = useContext(FirebaseContext);
+  const { carrito } = useContext(CarritoContext);
   const navigate = useNavigate();
   const auth = getAuth();
   const [typePassword, setTypePassword] = useState('password');
@@ -56,8 +58,11 @@ export const Login = () => {
           id: loggedInUser.uid,
           email: loggedInUser.email,
         });
-
-        navigate('/Checkout');
+        if (carrito.length === 0) {
+          navigate('/');
+        } else {
+          navigate('/Checkout');
+        }
       } catch (error) {
         console.error('Error during login:', error.code, error.message);
       }
@@ -83,6 +88,9 @@ export const Login = () => {
         gap: 1,
         width: { sx: 0, sm: '100%' },
         maxWidth: 700,
+        borderWidth: '10px',
+        borderStyle: 'solid',
+        borderImage: `url(${fondoCheck}) 10`,
       }}
     >
       <IoMdClose onClick={() => navigate('/')} className="icon-close" />
@@ -186,9 +194,6 @@ export const Login = () => {
           REGISTRATE
         </Button>
       </Typography>
-      <div>
-        <h2>Welcome, {user?.username}</h2>
-      </div>
     </Box>
   );
 };

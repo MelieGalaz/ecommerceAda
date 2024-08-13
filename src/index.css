@@ -14,7 +14,7 @@
 .carrusel-container {
   width: 100%;
   max-width: 1536px;
-  margin: 20px auto;
+  margin: auto;
   position: relative;
   overflow: hidden;
 }
