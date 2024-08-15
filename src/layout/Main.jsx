@@ -9,13 +9,15 @@ import { useContext } from 'react';
 import { FirebaseContext } from '../context/FirebaseContext';
 import { Agradecimiento } from '../rutas/Agradecimiento';
 import { OrdenesHistorial } from '../rutas/OrdenesHistorial';
+import { Inicio } from '../rutas/Inicio';
 
 export const Main = () => {
   const { user } = useContext(FirebaseContext);
 
   return (
     <Routes>
-      <Route path="/" element={<CardContenedor />} />
+      <Route path="/" element={<Inicio />} />
+      <Route path="/Productos" element={<CardContenedor />} />
       <Route path="Login" element={<Login />} />
       <Route path="Agradecimiento" element={<Agradecimiento />} />
       <Route path="Registrar" element={<Registrar />} />

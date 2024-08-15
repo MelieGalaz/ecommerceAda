@@ -1,13 +1,13 @@
 import React, { useContext } from 'react';
 import { FirebaseContext } from '../context/FirebaseContext';
-import { CarritoContext } from '../context/CarritoContex';
+// import { CarritoContext } from '../context/CarritoContex';
 import { Box, Container, Typography, Button } from '@mui/material';
 import { Link } from 'react-router-dom';
 import fondoCardCarrito from '../assets/fondoCardCarrito.avif';
 
 export const Card = ({ filtro }) => {
   const { productos } = useContext(FirebaseContext);
-  const { agregarAlCarrito } = useContext(CarritoContext);
+  // const { agregarAlCarrito } = useContext(CarritoContext);
   const [hoveredLink, setHoveredLink] = React.useState(null);
 
   const handleMouseEnter = (id) => {
@@ -96,7 +96,7 @@ export const Card = ({ filtro }) => {
               }}
             >
               <Link
-                to={`CardDetalle/${producto.id}`}
+                to={`/CardDetalle/${producto.id}`}
                 style={{
                   textDecoration: 'none',
                   color: hoveredLink === producto.id ? 'white' : '#7d2de8',

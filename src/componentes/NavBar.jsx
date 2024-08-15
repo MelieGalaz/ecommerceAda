@@ -280,7 +280,7 @@ import { getAuth, signOut } from 'firebase/auth';
 import { useNavigate } from 'react-router-dom';
 import { useMediaQuery, useTheme } from '@mui/material';
 
-const pages = ['Productos', 'home'];
+const pages = ['Inicio', 'Productos'];
 const settings = ['Historial', 'Salir'];
 
 export const NavBar = () => {
@@ -347,9 +347,9 @@ export const NavBar = () => {
       });
   };
 
-  const handleLogin = () => {
-    navigate('/login'); // Navegar a la página de login
-  };
+  // const handleLogin = () => {
+  //   navigate('/login'); // Navegar a la página de login
+  // };
 
   return (
     <AppBar
@@ -392,7 +392,12 @@ export const NavBar = () => {
                   onClose={handleCloseNavMenu}
                 >
                   {pages.map((page) => (
-                    <MenuItem key={page} onClick={() => navigate(`/${page}`)}>
+                    <MenuItem
+                      key={page}
+                      onClick={() =>
+                        navigate(page === 'Inicio' ? '/' : `/${page}`)
+                      }
+                    >
                       <Typography textAlign="center">{page}</Typography>
                     </MenuItem>
                   ))}
@@ -440,10 +445,19 @@ export const NavBar = () => {
               >
                 BOUTIQUE
               </Typography>
-              {pages.map((page) => (
+              {/* {pages.map((page) => (
                 <Button
                   key={page}
                   onClick={() => navigate(`/${page}`)}
+                  sx={{ color: 'white', display: 'block' }}
+                >
+                  {page}
+                </Button>
+              ))} */}
+              {pages.map((page) => (
+                <Button
+                  key={page}
+                  onClick={() => navigate(page === 'Inicio' ? '/' : `/${page}`)}
                   sx={{ color: 'white', display: 'block' }}
                 >
                   {page}

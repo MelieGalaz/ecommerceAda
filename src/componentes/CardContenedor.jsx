@@ -8,7 +8,6 @@ export const CardContenedor = () => {
   return (
     <>
       <Filtros setFiltro={setFiltro} />
-      <Carrusel />
 
       <Card filtro={filtro} />
     </>
