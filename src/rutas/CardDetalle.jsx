@@ -52,7 +52,29 @@ export const CardDetalle = () => {
               textAlign: 'center',
             }}
           >
-            <Button onClick={() => navigate('/')}>volver</Button>
+            <Box
+              sx={{
+                display: 'flex',
+                justifyContent: 'flex-start', // Alinea a la izquierda
+              }}
+            >
+              <Button
+                onClick={() => navigate('/')}
+                sx={{
+                  color: '#86067f',
+                  width: 'auto',
+                  fontWeight: 700,
+                  fontSize: 12,
+                  display: 'inline-block',
+                  '&:hover': {
+                    color: 'white',
+                  },
+                }}
+              >
+                Regresar
+              </Button>
+            </Box>
+
             <Typography variant="h6" sx={{ mb: 1, color: 'white' }}>
               Detalles del producto
             </Typography>
@@ -72,7 +94,7 @@ export const CardDetalle = () => {
                 maxWidth: '200px',
                 width: 'auto',
                 color: 'white',
-                borderRadius: 5,
+                borderRadius: 2,
                 backgroundColor: '#691b76',
               }}
             >

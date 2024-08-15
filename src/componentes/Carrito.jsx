@@ -44,7 +44,24 @@ export const Carrito = ({ state, toggleDrawer }) => {
           onClick={toggleDrawer('right', false)}
           style={{ color: 'white', textAlign: 'center', fontSize: 25 }}
         />
-        <Button onClick={eliminarTodo}>Vaciar carrito</Button>
+        {/* 
+        {carrito.length > 0 && (
+          <Button
+            onClick={eliminarTodo}
+            sx={{
+              color: 'white',
+              borderRadius: 2,
+              backgroundColor: '#cc97d4',
+              padding: '3px 16px',
+              fontSize: '15px',
+              fontWeight: '700',
+              margin: 'auto',
+              display: 'block',
+            }}
+          >
+            Vaciar carrito
+          </Button>
+        )} */}
         {carrito?.length === 0 ? (
           <Typography variant="h6" sx={{ color: 'white', textAlign: 'center' }}>
             No hay productos en el carrito
@@ -123,12 +140,13 @@ export const Carrito = ({ state, toggleDrawer }) => {
           ))
         )}
       </Box>
+
       {carrito.length > 0 && (
         <Box sx={{ backgroundColor: '#590287' }}>
           <Typography
             sx={{ color: 'white', fontSize: 18, textAlign: 'center' }}
           >
-            Subtotal: $ {subtotal}{' '}
+            Subtotal: $ {subtotal}
           </Typography>
           <Button
             sx={{
@@ -146,6 +164,24 @@ export const Carrito = ({ state, toggleDrawer }) => {
             }
           >
             Comprar
+          </Button>
+          <Button
+            onClick={eliminarTodo}
+            sx={{
+              color: 'white',
+              borderRadius: 2,
+              // backgroundColor: '#cc97d4',
+              padding: '3px 16px',
+              fontSize: '15px',
+              fontWeight: '700',
+              margin: 'auto',
+              display: 'block',
+              '&:hover': {
+                color: '#cc97d4',
+              },
+            }}
+          >
+            Vaciar carrito
           </Button>
         </Box>
       )}

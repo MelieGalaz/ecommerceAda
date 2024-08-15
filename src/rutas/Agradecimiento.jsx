@@ -30,21 +30,28 @@ export const Agradecimiento = () => {
             justifyContent: 'flex-start',
           }}
         >
-          <Button
-            onClick={() => navigate('/')}
+          <Box
             sx={{
-              color: '#51074d',
-              width: 'auto',
-              fontWeight: 700,
-              fontSize: 12,
-              display: 'inline-block',
-              '&:hover': {
-                color: '#86067f',
-              },
+              display: 'flex',
+              justifyContent: 'flex-start', // Alinea a la izquierda
             }}
           >
-            Regresar
-          </Button>
+            <Button
+              onClick={() => navigate('/')}
+              sx={{
+                color: '#51074d',
+                width: 'auto',
+                fontWeight: 700,
+                fontSize: 12,
+                display: 'inline-block',
+                '&:hover': {
+                  color: '#86067f',
+                },
+              }}
+            >
+              Regresar
+            </Button>
+          </Box>
         </Box>
         <Typography
           sx={{

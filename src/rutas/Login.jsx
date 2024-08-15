@@ -93,7 +93,28 @@ export const Login = () => {
         borderImage: `url(${fondoCheck}) 10`,
       }}
     >
-      <IoMdClose onClick={() => navigate('/')} className="icon-close" />
+      <Box
+        sx={{
+          display: 'flex',
+          justifyContent: 'flex-start', // Alinea a la izquierda
+        }}
+      >
+        <Button
+          onClick={() => navigate('/')}
+          sx={{
+            color: '#51074d',
+            width: 'auto',
+            fontWeight: 700,
+            fontSize: 12,
+            display: 'inline-block',
+            '&:hover': {
+              color: '#86067f',
+            },
+          }}
+        >
+          Regresar
+        </Button>
+      </Box>
       <Typography
         style={{
           fontSize: 25,
