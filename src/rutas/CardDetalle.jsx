@@ -1,9 +1,8 @@
-import { useContext } from 'react';
-import { useParams } from 'react-router-dom';
-import { useNavigate } from 'react-router';
+import { useContext, useState, useEffect } from 'react';
+import { useParams, useNavigate } from 'react-router-dom';
 import { FirebaseContext } from '../context/FirebaseContext';
 import { CarritoContext } from '../context/CarritoContex';
-import { Box, Button, Typography } from '@mui/material';
+import { Box, Button, Typography, CircularProgress } from '@mui/material';
 import fondoCardCarrito from '../assets/fondoCardCarrito.avif';
 
 export const CardDetalle = () => {
@@ -11,11 +10,29 @@ export const CardDetalle = () => {
   const { productos } = useContext(FirebaseContext);
   const { agregarAlCarrito } = useContext(CarritoContext);
   const navigate = useNavigate();
+  const [loading, setLoading] = useState(true);
   const producto = productos.find((producto) => producto.id === id);
+
+  useEffect(() => {
+    if (producto) {
+      setLoading(false);
+    }
+  }, [producto]);
 
   return (
     <div>
-      {producto ? (
+      {loading ? (
+        <Box
+          sx={{
+            display: 'flex',
+            justifyContent: 'center',
+            width: '100%',
+            minHeight: '50vh',
+          }}
+        >
+          <CircularProgress sx={{ color: '#66129b' }} />
+        </Box>
+      ) : producto ? (
         <Box
           sx={{
             display: 'flex',
@@ -34,7 +51,7 @@ export const CardDetalle = () => {
         >
           <img
             src={producto.image}
-            alt={producto.name}
+            alt={producto.nombre}
             style={{
               maxWidth: '320px',
               height: 'auto',
@@ -52,22 +69,17 @@ export const CardDetalle = () => {
               textAlign: 'center',
             }}
           >
-            <Box
-              sx={{
-                display: 'flex',
-                justifyContent: 'flex-start', // Alinea a la izquierda
-              }}
-            >
+            <Box sx={{ display: 'flex', justifyContent: 'flex-start' }}>
               <Button
-                onClick={() => navigate('/')}
+                onClick={() => navigate('/Productos')}
                 sx={{
-                  color: '#86067f',
+                  color: 'white',
                   width: 'auto',
                   fontWeight: 700,
                   fontSize: 12,
                   display: 'inline-block',
                   '&:hover': {
-                    color: 'white',
+                    color: '#7d2de8',
                   },
                 }}
               >
@@ -103,7 +115,12 @@ export const CardDetalle = () => {
           </Box>
         </Box>
       ) : (
-        <p>Producto no encontrado</p>
+        <Typography
+          variant="body1"
+          sx={{ color: 'white', textAlign: 'center' }}
+        >
+          Producto no encontrado
+        </Typography>
       )}
     </div>
   );

@@ -72,6 +72,7 @@ export const Carrito = ({ state, toggleDrawer }) => {
               key={producto.id}
               sx={{
                 padding: 2,
+
                 backgroundImage: `url(${fondoCardCarrito})`,
                 backgroundSize: 'cover',
                 backgroundPosition: 'center',
@@ -101,6 +102,7 @@ export const Carrito = ({ state, toggleDrawer }) => {
                     display: 'flex',
                     flexDirection: 'column',
                     alignItems: 'center',
+                    gap: '5px',
                   }}
                 >
                   <Typography variant="h6" sx={{ color: 'white' }}>
@@ -127,9 +129,9 @@ export const Carrito = ({ state, toggleDrawer }) => {
                     sx={{
                       color: 'white',
                       borderRadius: 2,
-                      backgroundColor: '#691b76',
+                      // backgroundColor: '#691b76',
                       padding: '3px 10px',
-                      fontSize: '13px',
+                      fontSize: '10px',
                     }}
                   >
                     Eliminar
@@ -170,9 +172,8 @@ export const Carrito = ({ state, toggleDrawer }) => {
             sx={{
               color: 'white',
               borderRadius: 2,
-              // backgroundColor: '#cc97d4',
               padding: '3px 16px',
-              fontSize: '15px',
+              fontSize: '10px',
               fontWeight: '700',
               margin: 'auto',
               display: 'block',

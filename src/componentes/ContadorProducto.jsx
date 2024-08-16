@@ -12,7 +12,14 @@ export const ContadorProducto = ({ producto }) => {
     restarCantidad(producto.id);
   };
   return (
-    <Box sx={{ display: 'flex', alignItems: 'center' }}>
+    <Box
+      sx={{
+        display: 'flex',
+        alignItems: 'center',
+        backgroundColor: '#691b76',
+        borderRadius: 2,
+      }}
+    >
       <IconButton onClick={handleRestar} sx={{ color: 'white' }}>
         <AiOutlineMinus />
       </IconButton>

@@ -1,64 +1,65 @@
 import { createContext, useState, useEffect } from 'react';
-import { getAddedProducts, setCartLS } from '../localStorage';
+import {
+  getAddedProducts,
+  setCartLS,
+  clearCartAfterTimeout,
+} from '../localStorage';
 
 export const CarritoContext = createContext();
 
 export const CarritoProvider = ({ children }) => {
-  const [carrito, setCarrito] = useState(getAddedProducts('carrito') || []);
-  const [cantidad, setCantidad] = useState(1);
+  const [carrito, setCarrito] = useState(getAddedProducts());
+  const [cantidad, setCantidad] = useState(0);
   const [subtotal, setSubtotal] = useState(0);
 
   useEffect(() => {
-    setCartLS(JSON.stringify(carrito));
-    console.log('sin bucle');
-    const timeoutId = setTimeout(() => {
-      eliminarTodo();
-      console.log('Carrito borrado después de 9 segundos');
-    }, 86400000);
+    // Limpiar el carrito después de 1 minuto
+    const intervalId = setInterval(() => {
+      clearCartAfterTimeout(setCarrito);
+    }, 60 * 1000); // Revisa cada minuto
 
-    return () => clearTimeout(timeoutId);
-  }, [carrito]);
+    return () => clearInterval(intervalId); // Limpiar el intervalo al desmontar
+  }, []);
 
   useEffect(() => {
-    const initialSubtotal = carrito.reduce((acc, producto) => {
-      return (
-        acc + (producto.cantidad > 0 ? producto.precio * producto.cantidad : 0)
-      );
-    }, 0);
-    setSubtotal(initialSubtotal);
-    console.log(initialSubtotal);
+    // Calcular subtotal y cantidad
+    const totalCantidad = carrito.reduce(
+      (acc, producto) => acc + (producto.cantidad || 0),
+      0
+    );
+    const totalSubtotal = carrito.reduce(
+      (acc, producto) => acc + producto.precio * (producto.cantidad || 0),
+      0
+    );
+
+    setCantidad(totalCantidad);
+    setSubtotal(totalSubtotal);
   }, [carrito]);
 
-  useEffect(() => {
-    const initialSubtotal = carrito.reduce((acc, producto) => {
-      return acc + (producto.cantidad > 0 ? producto.cantidad : 0);
-    }, 0);
-    setCantidad(initialSubtotal);
-    console.log(initialSubtotal);
-  }, [carrito]);
+  const actualizarCarrito = (nuevoCarrito) => {
+    setCarrito(nuevoCarrito);
+    setCartLS(nuevoCarrito);
+  };
 
   const agregarAlCarrito = (producto) => {
     const productoExiste = carrito.find((item) => item.id === producto.id);
-    if (productoExiste) {
-      const nuevoCarrito = carrito.map((item) =>
-        item.id === producto.id
-          ? { ...item, cantidad: item.cantidad + 1 }
-          : item
-      );
-      setCarrito(nuevoCarrito);
-    } else {
-      setCarrito([...carrito, { ...producto, cantidad: 1 }]);
-    }
-    console.log('Carrito añadido', carrito);
+    const nuevoCarrito = productoExiste
+      ? carrito.map((item) =>
+          item.id === producto.id
+            ? { ...item, cantidad: item.cantidad + 1 }
+            : item
+        )
+      : [...carrito, { ...producto, cantidad: 1 }];
+
+    actualizarCarrito(nuevoCarrito);
   };
 
   const EliminarUnProducto = (productoAEliminar) => {
     const nuevoCarrito = carrito.filter(
       (producto) => producto.id !== productoAEliminar.id
     );
-    setCarrito(nuevoCarrito);
+    actualizarCarrito(nuevoCarrito);
   };
-  console.log('Contenido del carrito:', carrito);
 
   const sumarCantidad = (productoId) => {
     const nuevoCarrito = carrito.map((producto) =>
@@ -66,8 +67,9 @@ export const CarritoProvider = ({ children }) => {
         ? { ...producto, cantidad: (producto.cantidad || 0) + 1 }
         : producto
     );
-    setCarrito(nuevoCarrito);
+    actualizarCarrito(nuevoCarrito);
   };
+
   const restarCantidad = (productoId) => {
     const nuevoCarrito = carrito.map((producto) => {
       if (producto.id === productoId) {
@@ -79,14 +81,20 @@ export const CarritoProvider = ({ children }) => {
       }
       return producto;
     });
-    setCarrito(nuevoCarrito);
+    actualizarCarrito(nuevoCarrito);
   };
+
   const calcularSubTotal = (producto) => {
-    return producto.precio * producto.cantidad;
+    return producto.precio * (producto.cantidad || 0);
   };
+
   const eliminarTodo = () => {
     setCarrito([]);
+    localStorage.clear();
+    // localStorage.removeItem('carrito');
+    // localStorage.removeItem('cartTimestamp');
   };
+
   return (
     <CarritoContext.Provider
       value={{

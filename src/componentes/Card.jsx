@@ -1,14 +1,21 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import { FirebaseContext } from '../context/FirebaseContext';
-// import { CarritoContext } from '../context/CarritoContex';
-import { Box, Container, Typography, Button } from '@mui/material';
+
+import { Box, Container, Typography, CircularProgress } from '@mui/material';
 import { Link } from 'react-router-dom';
 import fondoCardCarrito from '../assets/fondoCardCarrito.avif';
 
 export const Card = ({ filtro }) => {
   const { productos } = useContext(FirebaseContext);
-  // const { agregarAlCarrito } = useContext(CarritoContext);
-  const [hoveredLink, setHoveredLink] = React.useState(null);
+
+  const [hoveredLink, setHoveredLink] = useState(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    if (productos.length > 0) {
+      setLoading(false);
+    }
+  }, [productos]);
 
   const handleMouseEnter = (id) => {
     setHoveredLink(id);
@@ -34,7 +41,19 @@ export const Card = ({ filtro }) => {
         margin: '20px auto',
       }}
     >
-      {productosFiltrados.length > 0 ? (
+      {loading ? (
+        <Box
+          sx={{
+            display: 'flex',
+
+            justifyContent: 'center',
+            width: '100%',
+            minHeight: '50vh',
+          }}
+        >
+          <CircularProgress sx={{ color: '#66129b' }} />
+        </Box>
+      ) : productosFiltrados.length > 0 ? (
         productosFiltrados.map((producto) => (
           <Box
             key={producto.id}
@@ -99,7 +118,7 @@ export const Card = ({ filtro }) => {
                 to={`/CardDetalle/${producto.id}`}
                 style={{
                   textDecoration: 'none',
-                  color: hoveredLink === producto.id ? 'white' : '#7d2de8',
+                  color: hoveredLink === producto.id ? '#7d2de8' : 'white',
                 }}
                 onMouseEnter={() => handleMouseEnter(producto.id)}
                 onMouseLeave={handleMouseLeave}
@@ -107,17 +126,17 @@ export const Card = ({ filtro }) => {
                 ver más
               </Link>
               {/* <Button
-                onClick={() => agregarAlCarrito(producto)}
-                sx={{
-                  color: 'white',
-                  borderRadius: 2,
-                  backgroundColor: '#691b76',
-                  padding: '3px 15px',
-                  fontSize: '13px',
-                }}
-              >
-                agregar Al Carrito
-              </Button> */}
+                  onClick={() => agregarAlCarrito(producto)}
+                  sx={{
+                    color: 'white',
+                    borderRadius: 2,
+                    backgroundColor: '#691b76',
+                    padding: '3px 15px',
+                    fontSize: '13px',
+                  }}
+                >
+                  agregar Al Carrito
+                </Button> */}
             </Box>
           </Box>
         ))

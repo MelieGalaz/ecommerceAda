@@ -16,20 +16,8 @@ export const Checkout = () => {
 
     setCarrito([]);
     navigate('/Agradecimiento');
-    // navigate('/');
   };
-  // const handleFinalizarCompra = async () => {
-  //   if (!user) {
-  //     console.log('Usuario no autenticado');
-  //     navigate('/Login'); // Redirige al usuario a la página de inicio de sesión
-  //     return;
-  //   }
 
-  //   await finalizarCompra(carrito, subtotal);
-
-  //   setCarrito([]);
-  //   navigate('/Agradecimiento');
-  // };
   return (
     <Box
       sx={{
