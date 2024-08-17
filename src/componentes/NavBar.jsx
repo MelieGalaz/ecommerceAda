@@ -14,7 +14,7 @@ import { BiCartDownload } from 'react-icons/bi';
 import { HiShoppingCart } from 'react-icons/hi2';
 import { FaUser } from 'react-icons/fa';
 import { useState, useContext } from 'react';
-import fondoNav from '../assets/fondonav.avif';
+import fondoNav from '../assets/fondo1.jpg';
 import { Carrito } from './Carrito';
 import { CarritoContext } from '../context/CarritoContex';
 import { FirebaseContext } from '../context/FirebaseContext';
@@ -89,6 +89,10 @@ export const NavBar = () => {
       });
   };
 
+  const handleNavMenuItemClick = (page) => {
+    navigate(page === 'Inicio' ? '/' : `/${page}`);
+    handleCloseNavMenu(); // Cierra el menú de navegación después de la selección
+  };
   return (
     <AppBar
       position="static"
@@ -96,7 +100,7 @@ export const NavBar = () => {
         backgroundColor: 'transparent',
         backgroundImage: `url(${fondoNav})`,
         backgroundSize: 'cover',
-        backgroundPosition: 'bottom',
+        backgroundPosition: 'center',
         backgroundRepeat: 'no-repeat',
       }}
     >
@@ -132,9 +136,7 @@ export const NavBar = () => {
                   {pages.map((page) => (
                     <MenuItem
                       key={page}
-                      onClick={() =>
-                        navigate(page === 'Inicio' ? '/' : `/${page}`)
-                      }
+                      onClick={() => handleNavMenuItemClick(page)}
                     >
                       <Typography textAlign="center">{page}</Typography>
                     </MenuItem>
