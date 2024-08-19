@@ -1,4 +1,3 @@
-import React from 'react';
 import { useFormik } from 'formik';
 import * as yup from 'yup';
 import {
@@ -16,9 +15,10 @@ import { IoMdClose } from 'react-icons/io';
 import { getAuth, createUserWithEmailAndPassword } from 'firebase/auth';
 import { doc, setDoc } from 'firebase/firestore';
 import { db } from '../../firebase';
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import { useNavigate } from 'react-router';
 import fondoCheck from '../assets/fondoCheck.webp';
+import { FirebaseContext } from '../context/FirebaseContext';
 
 const validationSchema = yup.object({
   nombre: yup.string('Enter your name').required('Name is required'),
@@ -33,6 +33,7 @@ const validationSchema = yup.object({
 });
 
 export const Registrar = () => {
+  const { setModal } = useContext(FirebaseContext);
   const navigate = useNavigate();
   const auth = getAuth();
   const [typePassword, setTypePassword] = useState('password');
@@ -62,7 +63,8 @@ export const Registrar = () => {
         };
         await setDoc(doc(db, 'users', user.id), user);
         console.log(user);
-        navigate('/Login');
+        setModal(0);
+        navigate('/Agradecimiento');
       } catch (error) {
         console.error('Error during registration: ', error.code, error.message);
       }

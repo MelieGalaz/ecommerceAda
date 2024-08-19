@@ -9,11 +9,14 @@ import {
 } from 'firebase/firestore';
 import { db } from '../../firebase';
 import { getAuth, onAuthStateChanged } from 'firebase/auth';
-
+import { useNavigate } from 'react-router';
 export const FirebaseContext = createContext();
 
 export const FirebaseProvider = ({ children }) => {
+  const navigate = useNavigate();
+  const [loginRuta, setLoginRuta] = useState(false);
   const [productos, setProductos] = useState([]);
+  const [modal, setModal] = useState(0);
 
   const [user, setUser] = useState(null);
   const auth = getAuth();
@@ -84,10 +87,24 @@ export const FirebaseProvider = ({ children }) => {
       console.error('Usuario no autenticado.');
     }
   };
-
+  const cambiarRutasLogin = (page, Boolean) => {
+    navigate(page);
+    setLoginRuta(Boolean);
+    console.log(loginRuta);
+  };
   return (
     <FirebaseContext.Provider
-      value={{ productos, setProductos, user, setUser, finalizarCompra }}
+      value={{
+        productos,
+        setProductos,
+        user,
+        setUser,
+        finalizarCompra,
+        modal,
+        setModal,
+        cambiarRutasLogin,
+        loginRuta,
+      }}
     >
       {children}
     </FirebaseContext.Provider>

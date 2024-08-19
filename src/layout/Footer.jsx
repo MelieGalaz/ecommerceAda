@@ -201,11 +201,27 @@ export const Footer = () => {
           </Box>
         </Box>
       </Box>
-      <Box>
-        <a href="">
+      <Box
+        sx={{
+          display: 'flex',
+          margin: 'auto',
+          alignItems: 'center',
+          justifyContent: 'center',
+          gap: 3,
+        }}
+      >
+        <a
+          href="https://github.com/MelieGalaz"
+          target="black"
+          style={{ color: 'white', fontSize: 20 }}
+        >
           <FaGithub />
         </a>
-        <a href="">
+        <a
+          href="https://www.linkedin.com/in/mely-galaz-9638bb246/"
+          target="black"
+          style={{ color: 'white', fontSize: 20 }}
+        >
           <FaLinkedin />
         </a>
       </Box>

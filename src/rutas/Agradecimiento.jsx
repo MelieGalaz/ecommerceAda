@@ -1,9 +1,10 @@
 import { Box, Button, Typography } from '@mui/material';
-
+import { useContext } from 'react';
 import { useNavigate } from 'react-router';
-
+import { FirebaseContext } from '../context/FirebaseContext';
 import fondoCheck from '../assets/fondoCheck.webp';
 export const Agradecimiento = () => {
+  const { modal } = useContext(FirebaseContext);
   const navigate = useNavigate();
   return (
     <>
@@ -49,7 +50,8 @@ export const Agradecimiento = () => {
                 },
               }}
             >
-              Regresar
+              {modal === 0 && 'Aceptar'}
+              {modal === 1 && 'Regresar'}
             </Button>
           </Box>
         </Box>
@@ -61,26 +63,31 @@ export const Agradecimiento = () => {
             color: '#5c07a6',
           }}
         >
-          GRACIAS POR SU COMPRA!!
+          {modal === 0 && 'Se ha registrado correctamente'}
+          {modal === 1 && 'GRACIAS POR SU COMPRA!!'}
         </Typography>
-        <Typography
-          sx={{
-            fontSize: 20,
-            textAlign: 'center',
-            fontWeight: 500,
-          }}
-        >
-          Su pedido llegará en 48hs
-        </Typography>
-        <Typography
-          sx={{
-            fontSize: 20,
-            textAlign: 'center',
-            fontWeight: 500,
-          }}
-        >
-          Aproveche nuestras promociones
-        </Typography>
+        {modal === 1 && (
+          <>
+            <Typography
+              sx={{
+                fontSize: 20,
+                textAlign: 'center',
+                fontWeight: 500,
+              }}
+            >
+              Su pedido llegará en 48hs
+            </Typography>
+            <Typography
+              sx={{
+                fontSize: 20,
+                textAlign: 'center',
+                fontWeight: 500,
+              }}
+            >
+              Aproveche nuestras promociones
+            </Typography>
+          </>
+        )}
       </Box>
     </>
   );

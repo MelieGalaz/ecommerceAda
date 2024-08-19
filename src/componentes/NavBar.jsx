@@ -29,7 +29,7 @@ export const NavBar = () => {
   const [anchorElNav, setAnchorElNav] = useState(null);
   const [anchorElUser, setAnchorElUser] = useState(null);
   const { cantidad } = useContext(CarritoContext);
-  const { user } = useContext(FirebaseContext);
+  const { user, cambiarRutasLogin, loginRuta } = useContext(FirebaseContext);
   const navigate = useNavigate();
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('sm')); // Changed 'sx' to 'sm'
@@ -82,7 +82,7 @@ export const NavBar = () => {
     const auth = getAuth();
     signOut(auth)
       .then(() => {
-        navigate('/');
+        cambiarRutasLogin('/', false);
       })
       .catch((error) => {
         console.error('Error signing out:', error);
@@ -207,22 +207,24 @@ export const NavBar = () => {
             }}
           >
             <Box sx={{ display: 'flex' }}>
-              <HiShoppingCart
-                style={{ fontSize: '30px' }}
-                onClick={toggleDrawer('right', true)}
-              />
-              <span
-                style={{
-                  color: 'white',
-                  textShadow: '6px 6px 12px rgba(0, 0, 0, 0.9)',
-                }}
-              >
-                {cantidad > 0 ? cantidad : ''}
-              </span>
+              <Tooltip title="El carrito se vaciará en 24hs">
+                <HiShoppingCart
+                  style={{ fontSize: '30px' }}
+                  onClick={toggleDrawer('right', true)}
+                />
+                <span
+                  style={{
+                    color: 'white',
+                    textShadow: '6px 6px 12px rgba(0, 0, 0, 0.9)',
+                  }}
+                >
+                  {cantidad > 0 ? cantidad : ''}
+                </span>
+              </Tooltip>
             </Box>
             <Carrito state={state} toggleDrawer={toggleDrawer} />
 
-            <Tooltip title="Open settings">
+            <Tooltip title="usuario">
               {user ? (
                 <Button
                   onClick={handleOpenUserMenu}
@@ -237,7 +239,7 @@ export const NavBar = () => {
                 </Button>
               ) : (
                 <Button
-                  onClick={() => navigate('/Login')}
+                  onClick={() => cambiarRutasLogin('/Login', true)}
                   sx={{
                     display: 'flex',
                     flexDirection: 'column',

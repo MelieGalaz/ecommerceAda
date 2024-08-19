@@ -1,4 +1,4 @@
-import { useContext } from 'react';
+import { useContext, useEffect } from 'react';
 import { CarritoContext } from '../context/CarritoContex';
 import { Box, Typography, Button } from '@mui/material';
 import { useNavigate } from 'react-router';
@@ -7,17 +7,21 @@ import fondoCheck from '../assets/fondoCheck.webp';
 export const Checkout = () => {
   const { carrito, calcularSubTotal, subtotal, setCarrito } =
     useContext(CarritoContext);
-  const { finalizarCompra, user } = useContext(FirebaseContext);
+  const { finalizarCompra, user, setModal } = useContext(FirebaseContext);
   const navigate = useNavigate();
   console.log(carrito, user);
 
   const handleFinalizarCompra = () => {
     finalizarCompra(carrito, subtotal);
-
+    setModal(1);
     setCarrito([]);
     navigate('/Agradecimiento');
   };
-
+  useEffect(() => {
+    if (carrito.length === 0) {
+      navigate('/');
+    }
+  }, [carrito, navigate]);
   return (
     <Box
       sx={{
@@ -126,7 +130,7 @@ export const Checkout = () => {
           fontWeight: 700,
         }}
       >
-        Total: $ {subtotal}{' '}
+        Total: $ {subtotal}
       </Typography>
       <Button
         onClick={handleFinalizarCompra}

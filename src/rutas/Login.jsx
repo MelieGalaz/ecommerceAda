@@ -32,7 +32,7 @@ const validationSchema = yup.object({
 });
 
 export const Login = () => {
-  const { user, setUser } = useContext(FirebaseContext);
+  const { setUser, cambiarRutasLogin, loginRuta } = useContext(FirebaseContext);
   const { carrito } = useContext(CarritoContext);
   const navigate = useNavigate();
   const auth = getAuth();
@@ -58,10 +58,23 @@ export const Login = () => {
           id: loggedInUser.uid,
           email: loggedInUser.email,
         });
-        if (carrito.length === 0) {
+        // if (carrito.length === 0) {
+        //   navigate('/');
+        // } else {
+        //   navigate('/Checkout');
+        // }
+        if (
+          (loginRuta && carrito.length === 0) ||
+          (!loginRuta && carrito.length === 0)
+        ) {
           navigate('/');
-        } else {
+          console.log('si el carrito esta vacio va a home');
+        } else if (loginRuta && carrito.length !== 0) {
+          navigate('/Productos');
+          console.log('se logea antes de finalizar la compra');
+        } else if (!loginRuta && carrito.length !== 0) {
           navigate('/Checkout');
+          console.log('se logea cuando finaliza la compra');
         }
       } catch (error) {
         console.error('Error during login:', error.code, error.message);
@@ -100,7 +113,7 @@ export const Login = () => {
         }}
       >
         <Button
-          onClick={() => navigate('/')}
+          onClick={() => cambiarRutasLogin('/', false)}
           sx={{
             color: '#51074d',
             width: 'auto',

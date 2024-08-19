@@ -27,6 +27,7 @@ export const Main = () => {
         element={user ? <Checkout /> : <Navigate to="/Login" />}
       />
       <Route path="OrdenesHistorial" element={<OrdenesHistorial />} />
+
       <Route path="*" element={<NotFound />} />
     </Routes>
   );
