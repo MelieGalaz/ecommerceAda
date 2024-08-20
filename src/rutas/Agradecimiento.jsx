@@ -1,11 +1,18 @@
 import { Box, Button, Typography } from '@mui/material';
-import { useContext } from 'react';
+import { useContext, useEffect } from 'react';
 import { useNavigate } from 'react-router';
 import { FirebaseContext } from '../context/FirebaseContext';
 import fondoCheck from '../assets/fondoCheck.webp';
 export const Agradecimiento = () => {
-  const { modal } = useContext(FirebaseContext);
+  const { modal, setModal } = useContext(FirebaseContext);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    const storedModal = localStorage.getItem('modal');
+    if (storedModal) {
+      setModal(Number(storedModal));
+    }
+  }, []);
   return (
     <>
       <Box

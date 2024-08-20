@@ -3,7 +3,6 @@ import * as yup from 'yup';
 import {
   TextField,
   Button,
-  Container,
   Typography,
   InputAdornment,
   IconButton,
@@ -64,6 +63,7 @@ export const Registrar = () => {
         await setDoc(doc(db, 'users', user.id), user);
 
         setModal(0);
+
         navigate('/Agradecimiento');
       } catch (error) {
         console.error('Error during registration: ', error.code, error.message);

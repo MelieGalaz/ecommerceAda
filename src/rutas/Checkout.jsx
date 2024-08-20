@@ -13,7 +13,7 @@ export const Checkout = () => {
   const handleFinalizarCompra = () => {
     finalizarCompra(carrito, subtotal);
     setModal(1);
-
+    localStorage.setItem('modal', 1);
     eliminarTodo();
     navigate('/Agradecimiento');
   };
