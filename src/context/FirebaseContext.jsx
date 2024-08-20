@@ -36,16 +36,6 @@ export const FirebaseProvider = ({ children }) => {
     getProductos();
   }, []);
 
-  // const getUserInfo = async (uid) => {
-  //   try {
-  //     const docRef = doc(db, 'users', uid);
-  //     const document = await getDoc(docRef);
-  //     return document.data();
-  //   } catch (err) {
-  //     console.log(err);
-  //   }
-  // };
-
   useEffect(() => {
     const isAuth = () => {
       onAuthStateChanged(auth, async (user) => {
@@ -79,7 +69,6 @@ export const FirebaseProvider = ({ children }) => {
             total: subtotal,
           }),
         });
-        console.log('Compra finalizada y guardada en Firestore.');
       } catch (error) {
         console.error('Error al finalizar la compra:', error);
       }
@@ -90,7 +79,6 @@ export const FirebaseProvider = ({ children }) => {
   const cambiarRutasLogin = (page, Boolean) => {
     navigate(page);
     setLoginRuta(Boolean);
-    console.log(loginRuta);
   };
   return (
     <FirebaseContext.Provider

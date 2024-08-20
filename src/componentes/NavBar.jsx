@@ -29,10 +29,10 @@ export const NavBar = () => {
   const [anchorElNav, setAnchorElNav] = useState(null);
   const [anchorElUser, setAnchorElUser] = useState(null);
   const { cantidad } = useContext(CarritoContext);
-  const { user, cambiarRutasLogin, loginRuta } = useContext(FirebaseContext);
+  const { user, cambiarRutasLogin } = useContext(FirebaseContext);
   const navigate = useNavigate();
   const theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.down('sm')); // Changed 'sx' to 'sm'
+  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
 
   const [state, setState] = useState({
     right: false,
@@ -47,9 +47,9 @@ export const NavBar = () => {
         cerrarSesion();
         break;
       default:
-        navigate('/'); // Navegar a la página principal por defecto
+        navigate('/');
     }
-    handleCloseUserMenu(); // Cierra el menú después de la selección
+    handleCloseUserMenu();
   };
 
   const toggleDrawer = (anchor, open) => (event) => {
@@ -91,7 +91,7 @@ export const NavBar = () => {
 
   const handleNavMenuItemClick = (page) => {
     navigate(page === 'Inicio' ? '/' : `/${page}`);
-    handleCloseNavMenu(); // Cierra el menú de navegación después de la selección
+    handleCloseNavMenu();
   };
   return (
     <AppBar
@@ -138,7 +138,12 @@ export const NavBar = () => {
                       key={page}
                       onClick={() => handleNavMenuItemClick(page)}
                     >
-                      <Typography textAlign="center">{page}</Typography>
+                      <Typography
+                        textAlign="center"
+                        sx={{ fontWeight: 700, fontFamily: 'Spectral' }}
+                      >
+                        {page}
+                      </Typography>
                     </MenuItem>
                   ))}
                 </Menu>
@@ -151,7 +156,7 @@ export const NavBar = () => {
               <Typography
                 variant="h5"
                 sx={{
-                  fontFamily: 'monospace',
+                  fontFamily: 'Satisfy',
                   fontWeight: 700,
                   letterSpacing: '.3rem',
                   color: 'inherit',
@@ -160,7 +165,7 @@ export const NavBar = () => {
                   alignItems: 'center',
                 }}
               >
-                BOUTIQUE
+                MGJoyas
               </Typography>
             )}
 
@@ -176,21 +181,25 @@ export const NavBar = () => {
                 sx={{
                   display: 'flex',
                   alignItems: 'center',
-                  fontFamily: 'monospace',
+                  fontFamily: 'Satisfy',
                   fontWeight: 700,
                   letterSpacing: '.3rem',
                   color: 'inherit',
                   textDecoration: 'none',
                 }}
               >
-                BOUTIQUE
+                MGJoyas
               </Typography>
 
               {pages.map((page) => (
                 <Button
                   key={page}
                   onClick={() => navigate(page === 'Inicio' ? '/' : `/${page}`)}
-                  sx={{ color: 'white', display: 'block' }}
+                  sx={{
+                    color: 'white',
+                    display: 'block',
+                    fontFamily: 'Spectral',
+                  }}
                 >
                   {page}
                 </Button>
@@ -206,82 +215,113 @@ export const NavBar = () => {
               gap: '5px',
             }}
           >
-            <Box sx={{ display: 'flex' }}>
+            <Box sx={{ display: 'flex', position: 'relative' }}>
               <Tooltip title="El carrito se vaciará en 24hs">
-                <HiShoppingCart
-                  style={{ fontSize: '30px' }}
-                  onClick={toggleDrawer('right', true)}
-                />
+                <div>
+                  <HiShoppingCart
+                    style={{ fontSize: '30px', marginTop: '12px' }}
+                    onClick={toggleDrawer('right', true)}
+                  />
+                </div>
+              </Tooltip>
+              {cantidad > 0 && (
                 <span
                   style={{
                     color: 'white',
                     textShadow: '6px 6px 12px rgba(0, 0, 0, 0.9)',
+                    position: 'absolute',
+                    top: '-10px',
+                    right: '-10px',
+                    backgroundColor: 'rgb(156 27 238)',
+                    borderRadius: '50%',
+                    padding: '2px 6px',
+                    fontSize: '12px',
+                    fontWeight: 'bold',
+                    marginTop: '11px',
+                    fontFamily: 'Spectral',
                   }}
                 >
-                  {cantidad > 0 ? cantidad : ''}
+                  {cantidad}
                 </span>
-              </Tooltip>
+              )}
             </Box>
             <Carrito state={state} toggleDrawer={toggleDrawer} />
 
             <Tooltip title="usuario">
-              {user ? (
-                <Button
-                  onClick={handleOpenUserMenu}
-                  sx={{ p: 0, display: 'flex', flexDirection: 'column' }}
-                >
-                  <FaUser style={{ fontSize: '23px', color: 'white' }} />
-                  <Typography
-                    sx={{ color: 'white', fontSize: 10, textAlign: 'center' }}
+              <div>
+                {user ? (
+                  <Button
+                    onClick={handleOpenUserMenu}
+                    sx={{ p: 0, display: 'flex', flexDirection: 'column' }}
                   >
-                    {user.username}
-                  </Typography>
-                </Button>
-              ) : (
-                <Button
-                  onClick={() => cambiarRutasLogin('/Login', true)}
-                  sx={{
-                    display: 'flex',
-                    flexDirection: 'column',
-                    padding: '0',
-                  }}
-                >
-                  <FaUser style={{ fontSize: '23px', color: 'white' }} />
-                  <Typography
-                    sx={{ color: 'white', fontSize: 10, textAlign: 'center' }}
+                    <FaUser style={{ fontSize: '23px', color: 'white' }} />
+                    <Typography
+                      sx={{
+                        color: 'white',
+                        fontSize: 10,
+                        textAlign: 'center',
+                        fontFamily: 'Spectral',
+                      }}
+                    >
+                      {user.username}
+                    </Typography>
+                  </Button>
+                ) : (
+                  <Button
+                    onClick={() => cambiarRutasLogin('/Login', true)}
+                    sx={{
+                      display: 'flex',
+                      flexDirection: 'column',
+                      padding: '0',
+                      fontFamily: 'Spectral',
+                    }}
                   >
-                    Iniciar Sesión
-                  </Typography>
-                </Button>
-              )}
+                    <FaUser style={{ fontSize: '23px', color: 'white' }} />
+                    <Typography
+                      sx={{
+                        color: 'white',
+                        fontSize: 10,
+                        textAlign: 'center',
+                        fontFamily: 'Spectral',
+                      }}
+                    >
+                      Iniciar Sesión
+                    </Typography>
+                  </Button>
+                )}
+              </div>
             </Tooltip>
-
-            <Menu
-              sx={{ mt: '45px' }}
-              id="menu-appbar"
-              anchorEl={anchorElUser}
-              anchorOrigin={{
-                vertical: 'top',
-                horizontal: 'right',
-              }}
-              keepMounted
-              transformOrigin={{
-                vertical: 'top',
-                horizontal: 'right',
-              }}
-              open={Boolean(anchorElUser)}
-              onClose={handleCloseUserMenu}
-            >
-              {settings.map((setting) => (
-                <MenuItem
-                  key={setting}
-                  onClick={() => handleMenuItemClick(setting)}
-                >
-                  <Typography textAlign="center">{setting}</Typography>
-                </MenuItem>
-              ))}
-            </Menu>
           </Box>
+          <Menu
+            sx={{ mt: '45px' }}
+            id="menu-appbar"
+            anchorEl={anchorElUser}
+            anchorOrigin={{
+              vertical: 'top',
+              horizontal: 'right',
+            }}
+            keepMounted
+            transformOrigin={{
+              vertical: 'top',
+              horizontal: 'right',
+            }}
+            open={Boolean(anchorElUser)}
+            onClose={handleCloseUserMenu}
+          >
+            {settings.map((setting) => (
+              <MenuItem
+                key={setting}
+                onClick={() => handleMenuItemClick(setting)}
+              >
+                <Typography
+                  textAlign="center"
+                  sx={{ fontWeight: 700, fontFamily: 'Spectral' }}
+                >
+                  {setting}
+                </Typography>
+              </MenuItem>
+            ))}
+          </Menu>
         </Toolbar>
       </Container>
     </AppBar>

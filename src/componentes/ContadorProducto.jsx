@@ -24,7 +24,7 @@ export const ContadorProducto = ({ producto }) => {
         <AiOutlineMinus />
       </IconButton>
 
-      <Typography sx={{ color: 'white' }}>
+      <Typography sx={{ color: 'white', fontFamily: 'Spectral' }}>
         {producto && producto.cantidad ? producto.cantidad.toString() : '0'}
       </Typography>
       <IconButton onClick={handleSumar} sx={{ color: 'white' }}>

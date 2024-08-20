@@ -77,6 +77,7 @@ export const CardDetalle = () => {
                   width: 'auto',
                   fontWeight: 700,
                   fontSize: 12,
+                  fontFamily: 'Spectral',
                   display: 'inline-block',
                   '&:hover': {
                     color: '#7d2de8',
@@ -87,16 +88,28 @@ export const CardDetalle = () => {
               </Button>
             </Box>
 
-            <Typography variant="h6" sx={{ mb: 1, color: 'white' }}>
+            <Typography
+              variant="h6"
+              sx={{ mb: 1, color: 'white', fontFamily: 'Spectral' }}
+            >
               Detalles del producto
             </Typography>
-            <Typography variant="h5" sx={{ mb: 1, color: 'white' }}>
+            <Typography
+              variant="h5"
+              sx={{ mb: 1, color: 'white', fontFamily: 'Spectral' }}
+            >
               {producto.nombre}
             </Typography>
-            <Typography variant="body1" sx={{ mb: 1, color: 'white' }}>
+            <Typography
+              variant="body1"
+              sx={{ mb: 1, color: 'white', fontFamily: 'Spectral' }}
+            >
               {producto.descripcion}
             </Typography>
-            <Typography variant="body2" sx={{ mb: 2, color: 'white' }}>
+            <Typography
+              variant="body2"
+              sx={{ mb: 2, color: 'white', fontFamily: 'Spectral' }}
+            >
               Precio: ${producto.precio}
             </Typography>
             <Button
@@ -108,6 +121,7 @@ export const CardDetalle = () => {
                 color: 'white',
                 borderRadius: 2,
                 backgroundColor: '#691b76',
+                fontFamily: 'Spectral',
               }}
             >
               Agregar al carrito
@@ -117,7 +131,7 @@ export const CardDetalle = () => {
       ) : (
         <Typography
           variant="body1"
-          sx={{ color: 'white', textAlign: 'center' }}
+          sx={{ color: 'white', textAlign: 'center', fontFamily: 'Spectral' }}
         >
           Producto no encontrado
         </Typography>

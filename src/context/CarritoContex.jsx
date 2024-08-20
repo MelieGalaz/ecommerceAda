@@ -90,9 +90,9 @@ export const CarritoProvider = ({ children }) => {
 
   const eliminarTodo = () => {
     setCarrito([]);
-    localStorage.clear();
-    // localStorage.removeItem('carrito');
-    // localStorage.removeItem('cartTimestamp');
+
+    localStorage.removeItem('carrito');
+    localStorage.removeItem('cartTimestamp');
   };
 
   return (

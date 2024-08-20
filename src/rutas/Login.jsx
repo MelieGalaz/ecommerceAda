@@ -5,7 +5,6 @@ import * as yup from 'yup';
 import {
   TextField,
   Button,
-  Container,
   InputAdornment,
   IconButton,
   Typography,
@@ -14,7 +13,6 @@ import {
 import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
 import { FaEyeSlash } from 'react-icons/fa6';
 import { IoEyeSharp } from 'react-icons/io5';
-import { IoMdClose } from 'react-icons/io';
 import { useState } from 'react';
 import { useNavigate } from 'react-router';
 import { FirebaseContext } from '../context/FirebaseContext';
@@ -58,23 +56,16 @@ export const Login = () => {
           id: loggedInUser.uid,
           email: loggedInUser.email,
         });
-        // if (carrito.length === 0) {
-        //   navigate('/');
-        // } else {
-        //   navigate('/Checkout');
-        // }
+
         if (
           (loginRuta && carrito.length === 0) ||
           (!loginRuta && carrito.length === 0)
         ) {
           navigate('/');
-          console.log('si el carrito esta vacio va a home');
         } else if (loginRuta && carrito.length !== 0) {
           navigate('/Productos');
-          console.log('se logea antes de finalizar la compra');
         } else if (!loginRuta && carrito.length !== 0) {
           navigate('/Checkout');
-          console.log('se logea cuando finaliza la compra');
         }
       } catch (error) {
         console.error('Error during login:', error.code, error.message);
@@ -109,7 +100,7 @@ export const Login = () => {
       <Box
         sx={{
           display: 'flex',
-          justifyContent: 'flex-start', // Alinea a la izquierda
+          justifyContent: 'flex-start',
         }}
       >
         <Button
@@ -120,6 +111,7 @@ export const Login = () => {
             fontWeight: 700,
             fontSize: 12,
             display: 'inline-block',
+            fontFamily: 'Spectral',
             '&:hover': {
               color: '#86067f',
             },
@@ -132,8 +124,9 @@ export const Login = () => {
         style={{
           fontSize: 25,
           textAlign: 'center',
-          fontWeight: 700,
+          fontWeight: 800,
           color: '#66129b',
+          fontFamily: 'Spectral',
         }}
       >
         Inicia Sesión
@@ -142,6 +135,8 @@ export const Login = () => {
         sx={{
           fontSize: 17,
           color: '#66129b',
+          fontFamily: 'Spectral',
+          fontWeight: 800,
         }}
       >
         Correo
@@ -156,12 +151,14 @@ export const Login = () => {
         onBlur={formik.handleBlur}
         error={formik.touched.email && Boolean(formik.errors.email)}
         helperText={formik.touched.email && formik.errors.email}
-        autoComplete="email" // Agregado para el campo de email
+        autoComplete="email"
       />
       <Typography
         sx={{
           fontSize: 17,
           color: '#66129b',
+          fontFamily: 'Spectral',
+          fontWeight: 800,
         }}
       >
         Contraseña
@@ -171,7 +168,7 @@ export const Login = () => {
         id="password"
         name="password"
         label="Password"
-        autoComplete="current-password" // Ya estaba agregado
+        autoComplete="current-password"
         type={typePassword}
         value={formik.values.password}
         onChange={formik.handleChange}
@@ -205,6 +202,7 @@ export const Login = () => {
           backgroundColor: '#691b76',
           padding: '3px 15px',
           fontSize: '13px',
+          fontFamily: 'Spectral',
           margin: 'auto',
           '&:hover': {
             backgroundColor: '#9b12a6',
@@ -213,13 +211,14 @@ export const Login = () => {
       >
         Iniciar sesión
       </Button>
-      <Typography>
+      <Typography sx={{ fontFamily: 'Spectral', fontWeight: 800 }}>
         Si no tienes cuenta,
         <Button
           onClick={() => navigate('/Registrar')}
           sx={{
             color: '#66129b',
             fontWeight: 700,
+            fontFamily: 'Spectral',
             '&:hover': {
               color: '#9b12a6',
             },

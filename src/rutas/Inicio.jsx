@@ -11,6 +11,7 @@ export const Inicio = () => {
               textAlign: 'center',
               fontWeight: 800,
               color: '#3f0165',
+              fontFamily: 'Spectral',
               fontSize: {
                 xs: '20px',
                 sm: '23px',
@@ -22,6 +23,8 @@ export const Inicio = () => {
           <Typography
             sx={{
               textAlign: 'center',
+              fontFamily: 'Spectral',
+              padding: '10px',
               fontSize: { sx: '15px', sm: '18px' },
               color: '#3f0165',
             }}
@@ -32,32 +35,6 @@ export const Inicio = () => {
           </Typography>
         </Box>
       </Box>
-      {/* <Box
-        sx={{
-          display: 'flex',
-          justifyContent: 'center',
-          alignItems: 'center',
-          marginTop: '20px',
-        }}
-      >
-        <video
-          controls
-          autoPlay
-          loop
-          muted
-          style={{
-            width: '100%',
-            maxWidth: '1100px',
-            height: '400px',
-            objectFit: 'cover',
-
-            boxShadow: '0px 4px 10px rgba(0, 0, 0, 0.3)',
-          }}
-        >
-          <source src={videoInicio} type="video/mp4" />
-          Your browser does not support the video tag.
-        </video>
-      </Box> */}
 
       <Carrusel />
       <Box sx={{ maxWidth: 800, margin: '20px auto' }}>
@@ -66,6 +43,8 @@ export const Inicio = () => {
             textAlign: 'center',
             fontWeight: 800,
             color: '#3f0165',
+            fontFamily: 'Spectral',
+            padding: '10px',
             fontSize: {
               xs: '15px',
               sm: '18px',
@@ -95,7 +74,6 @@ export const Inicio = () => {
             maxWidth: '1100px',
             height: '400px',
             objectFit: 'cover',
-
             boxShadow: '0px 4px 10px rgba(0, 0, 0, 0.3)',
           }}
         >

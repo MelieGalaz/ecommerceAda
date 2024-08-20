@@ -44,26 +44,12 @@ export const Carrito = ({ state, toggleDrawer }) => {
           onClick={toggleDrawer('right', false)}
           style={{ color: 'white', textAlign: 'center', fontSize: 25 }}
         />
-        {/* 
-        {carrito.length > 0 && (
-          <Button
-            onClick={eliminarTodo}
-            sx={{
-              color: 'white',
-              borderRadius: 2,
-              backgroundColor: '#cc97d4',
-              padding: '3px 16px',
-              fontSize: '15px',
-              fontWeight: '700',
-              margin: 'auto',
-              display: 'block',
-            }}
-          >
-            Vaciar carrito
-          </Button>
-        )} */}
+
         {carrito?.length === 0 ? (
-          <Typography variant="h6" sx={{ color: 'white', textAlign: 'center' }}>
+          <Typography
+            variant="h6"
+            sx={{ color: 'white', textAlign: 'center', fontFamily: 'Spectral' }}
+          >
             No hay productos en el carrito
           </Typography>
         ) : (
@@ -105,12 +91,19 @@ export const Carrito = ({ state, toggleDrawer }) => {
                     gap: '5px',
                   }}
                 >
-                  <Typography variant="h6" sx={{ color: 'white' }}>
+                  <Typography
+                    variant="h6"
+                    sx={{ color: 'white', fontFamily: 'Spectral' }}
+                  >
                     {producto.nombre}
                   </Typography>
                   <Typography
                     variant="body2"
-                    sx={{ textAlign: 'center', color: 'white' }}
+                    sx={{
+                      textAlign: 'center',
+                      color: 'white',
+                      fontFamily: 'Spectral',
+                    }}
                   >
                     Precio: $ {producto.precio}
                   </Typography>
@@ -120,6 +113,7 @@ export const Carrito = ({ state, toggleDrawer }) => {
                       textAlign: 'center',
                       color: 'white',
                       fontWeight: 500,
+                      fontFamily: 'Spectral',
                     }}
                   >
                     Subtotal: ${calcularSubTotal(producto)}
@@ -129,7 +123,7 @@ export const Carrito = ({ state, toggleDrawer }) => {
                     sx={{
                       color: 'white',
                       borderRadius: 2,
-                      // backgroundColor: '#691b76',
+                      fontFamily: 'Spectral',
                       padding: '3px 10px',
                       fontSize: '10px',
                     }}
@@ -146,7 +140,12 @@ export const Carrito = ({ state, toggleDrawer }) => {
       {carrito.length > 0 && (
         <Box sx={{ backgroundColor: '#590287' }}>
           <Typography
-            sx={{ color: 'white', fontSize: 18, textAlign: 'center' }}
+            sx={{
+              color: 'white',
+              fontSize: 18,
+              textAlign: 'center',
+              fontFamily: 'Spectral',
+            }}
           >
             Subtotal: $ {subtotal}
           </Typography>
@@ -160,6 +159,7 @@ export const Carrito = ({ state, toggleDrawer }) => {
               fontWeight: '700',
               margin: '15px auto',
               display: 'block',
+              fontFamily: 'Spectral',
             }}
             onClick={
               user ? () => navigate('/Checkout') : () => navigate('/Login')
@@ -177,6 +177,7 @@ export const Carrito = ({ state, toggleDrawer }) => {
               fontWeight: '700',
               margin: 'auto',
               display: 'block',
+              fontFamily: 'Spectral',
               '&:hover': {
                 color: '#cc97d4',
               },

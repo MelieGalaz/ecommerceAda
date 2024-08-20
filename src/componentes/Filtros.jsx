@@ -3,7 +3,6 @@ import { Box, TextField } from '@mui/material';
 export const Filtros = ({ setFiltro }) => {
   const handleChange = (event) => {
     setFiltro(event.target.value);
-    // console.log(event.target.value);
   };
 
   return (

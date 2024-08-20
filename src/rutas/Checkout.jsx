@@ -5,16 +5,16 @@ import { useNavigate } from 'react-router';
 import { FirebaseContext } from '../context/FirebaseContext';
 import fondoCheck from '../assets/fondoCheck.webp';
 export const Checkout = () => {
-  const { carrito, calcularSubTotal, subtotal, setCarrito } =
+  const { carrito, calcularSubTotal, subtotal, eliminarTodo } =
     useContext(CarritoContext);
-  const { finalizarCompra, user, setModal } = useContext(FirebaseContext);
+  const { finalizarCompra, setModal } = useContext(FirebaseContext);
   const navigate = useNavigate();
-  console.log(carrito, user);
 
   const handleFinalizarCompra = () => {
     finalizarCompra(carrito, subtotal);
     setModal(1);
-    setCarrito([]);
+
+    eliminarTodo();
     navigate('/Agradecimiento');
   };
   useEffect(() => {
@@ -55,6 +55,7 @@ export const Checkout = () => {
             fontWeight: 700,
             fontSize: 12,
             display: 'inline-block',
+            fontFamily: 'Spectral',
             '&:hover': {
               color: '#86067f',
             },
@@ -65,10 +66,11 @@ export const Checkout = () => {
       </Box>
       <Typography
         sx={{
-          fontSize: 24,
+          fontSize: 25,
           textAlign: 'center',
-          fontWeight: 700,
+          fontWeight: 800,
           color: '#5c07a6',
+          fontFamily: 'Spectral',
         }}
       >
         Mis compras
@@ -84,7 +86,9 @@ export const Checkout = () => {
             flexDirection: 'column',
           }}
         >
-          <Typography sx={{ fontWeight: 700, fontSize: 19 }}>
+          <Typography
+            sx={{ fontWeight: 800, fontSize: 20, fontFamily: 'Spectral' }}
+          >
             {producto.nombre}
           </Typography>
           <Box
@@ -104,18 +108,29 @@ export const Checkout = () => {
               }}
             />
             <Box>
-              <Typography sx={{ fontWeight: 700 }}>Cantidad</Typography>
-              <Typography>{producto.cantidad}</Typography>
+              <Typography sx={{ fontWeight: 800, fontFamily: 'Spectral' }}>
+                Cantidad
+              </Typography>
+              <Typography sx={{ fontFamily: 'Spectral' }}>
+                {producto.cantidad}
+              </Typography>
             </Box>
             <Box>
-              <Typography sx={{ fontWeight: 700 }}>Precio</Typography>
-              <Typography> ${producto.precio}</Typography>
+              <Typography sx={{ fontWeight: 800, fontFamily: 'Spectral' }}>
+                Precio
+              </Typography>
+              <Typography sx={{ fontFamily: 'Spectral' }}>
+                ${producto.precio}
+              </Typography>
             </Box>
             <Box>
-              <Typography sx={{ fontWeight: 700 }}> Subtotal </Typography>
+              <Typography sx={{ fontWeight: 800, fontFamily: 'Spectral' }}>
+                Subtotal
+              </Typography>
               <Typography
                 sx={{
                   fontWeight: 500,
+                  fontFamily: 'Spectral',
                 }}
               >
                 ${calcularSubTotal(producto)}
@@ -127,7 +142,8 @@ export const Checkout = () => {
       <Typography
         sx={{
           textAlign: 'center',
-          fontWeight: 700,
+          fontWeight: 800,
+          fontFamily: 'Spectral',
         }}
       >
         Total: $ {subtotal}
@@ -139,6 +155,7 @@ export const Checkout = () => {
           borderRadius: 2,
           backgroundColor: '#51074d',
           padding: '3px 16px',
+          fontFamily: 'Spectral',
           fontSize: '15px',
           fontWeight: '700',
           margin: '15px auto',

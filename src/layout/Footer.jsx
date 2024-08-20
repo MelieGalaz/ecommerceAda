@@ -22,14 +22,22 @@ export const Footer = () => {
         backgroundRepeat: 'no-repeat',
       }}
     >
-      <Box>
+      <Box
+        sx={{
+          display: 'flex',
+          flexDirection: 'column',
+          gap: '5px',
+          margin: '10px auto',
+        }}
+      >
         <Typography
           sx={{
             color: 'white',
             width: 'auto',
             fontWeight: 700,
-            fontSize: 15,
+            fontSize: 17,
             textAlign: 'center',
+            fontFamily: 'Spectral',
           }}
         >
           Categorías
@@ -126,8 +134,9 @@ export const Footer = () => {
             color: 'white',
             width: 'auto',
             fontWeight: 700,
-            fontSize: 15,
+            fontSize: 17,
             textAlign: 'center',
+            fontFamily: 'Spectral',
           }}
         >
           Formas de Pago
@@ -146,8 +155,9 @@ export const Footer = () => {
                 color: 'white',
                 width: 'auto',
                 fontWeight: 700,
-                fontSize: 12,
+                fontSize: 15,
                 textAlign: 'center',
+                fontFamily: 'Spectral',
               }}
             >
               Efectivo
@@ -157,15 +167,16 @@ export const Footer = () => {
                 color: 'white',
                 width: 'auto',
                 fontWeight: 700,
-                fontSize: 12,
+                fontSize: 15,
                 textAlign: 'center',
+                fontFamily: 'Spectral',
               }}
             >
               Tranferencia Bancaria
             </Typography>
             <img
               src={paypal}
-              alt=""
+              alt="paypal"
               style={{ whiteSpace: '100%', height: '30px' }}
             />
           </Box>
@@ -175,8 +186,9 @@ export const Footer = () => {
                 color: 'white',
                 width: 'auto',
                 fontWeight: 700,
-                fontSize: 12,
+                fontSize: 15,
                 textAlign: 'center',
+                fontFamily: 'Spectral',
               }}
             >
               Tarjetas de Credito
@@ -184,17 +196,17 @@ export const Footer = () => {
             <Box sx={{ display: 'flex', alignItems: 'center' }}>
               <img
                 src={visa}
-                alt=""
+                alt="tarjeta"
                 style={{ whiteSpace: '100%', height: '30px' }}
               />
               <img
                 src={master}
-                alt=""
+                alt="tarjeta"
                 style={{ whiteSpace: '100%', height: '33px' }}
               />
               <img
                 src={american}
-                alt=""
+                alt="tarjeta"
                 style={{ whiteSpace: '100%', height: '50px' }}
               />
             </Box>
@@ -213,7 +225,10 @@ export const Footer = () => {
         <a
           href="https://github.com/MelieGalaz"
           target="black"
-          style={{ color: 'white', fontSize: 20 }}
+          style={{
+            color: 'white',
+            fontSize: 20,
+          }}
         >
           <FaGithub />
         </a>
@@ -226,8 +241,18 @@ export const Footer = () => {
         </a>
       </Box>
 
-      <Typography variant="subtitle1" color="white" component="div">
-        COPYRIGHT
+      <Typography
+        sx={{
+          color: 'white',
+          width: 'auto',
+          fontWeight: 700,
+          fontSize: 13,
+          textAlign: 'center',
+          marginBottom: '10px',
+          fontFamily: 'Charis SIL',
+        }}
+      >
+        Copyright MelieGalaz
       </Typography>
     </Container>
   );

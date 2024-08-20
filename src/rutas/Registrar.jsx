@@ -62,7 +62,7 @@ export const Registrar = () => {
           id: userCredential.user.uid,
         };
         await setDoc(doc(db, 'users', user.id), user);
-        console.log(user);
+
         setModal(0);
         navigate('/Agradecimiento');
       } catch (error) {
@@ -93,7 +93,7 @@ export const Registrar = () => {
       <Box
         sx={{
           display: 'flex',
-          justifyContent: 'flex-start', // Alinea a la izquierda
+          justifyContent: 'flex-start',
         }}
       >
         <Button
@@ -101,7 +101,8 @@ export const Registrar = () => {
           sx={{
             color: '#51074d',
             width: 'auto',
-            fontWeight: 700,
+            fontWeight: 800,
+            fontFamily: 'Spectral',
             fontSize: 12,
             display: 'inline-block',
             '&:hover': {
@@ -116,8 +117,9 @@ export const Registrar = () => {
         style={{
           fontSize: 25,
           textAlign: 'center',
-          fontWeight: 700,
+          fontWeight: 800,
           color: '#66129b',
+          fontFamily: 'Spectral',
         }}
       >
         Registrate
@@ -126,6 +128,8 @@ export const Registrar = () => {
         sx={{
           fontSize: 17,
           color: '#66129b',
+          fontFamily: 'Spectral',
+          fontWeight: 800,
         }}
       >
         Nombre
@@ -140,12 +144,14 @@ export const Registrar = () => {
         onBlur={formik.handleBlur}
         error={formik.touched.nombre && Boolean(formik.errors.nombre)}
         helperText={formik.touched.nombre && formik.errors.nombre}
-        autoComplete="name" // Agregado para el campo de nombre
+        autoComplete="name"
       />
       <Typography
         sx={{
           fontSize: 17,
           color: '#66129b',
+          fontFamily: 'Spectral',
+          fontWeight: 800,
         }}
       >
         Correo
@@ -160,12 +166,14 @@ export const Registrar = () => {
         onBlur={formik.handleBlur}
         error={formik.touched.email && Boolean(formik.errors.email)}
         helperText={formik.touched.email && formik.errors.email}
-        autoComplete="email" // Agregado para el campo de email
+        autoComplete="email"
       />
       <Typography
         sx={{
           fontSize: 17,
+          fontWeight: 800,
           color: '#66129b',
+          fontFamily: 'Spectral',
         }}
       >
         Contraseña
@@ -198,7 +206,7 @@ export const Registrar = () => {
             </InputAdornment>
           ),
         }}
-        autoComplete="new-password" // Agregado para el campo de password
+        autoComplete="new-password"
       />
       <Button
         type="submit"
@@ -208,6 +216,7 @@ export const Registrar = () => {
           backgroundColor: '#691b76',
           padding: '3px 15px',
           fontSize: '13px',
+          fontFamily: 'Spectral',
           margin: 'auto',
           '&:hover': {
             backgroundColor: '#9b12a6',
@@ -216,13 +225,14 @@ export const Registrar = () => {
       >
         Registrarse
       </Button>
-      <Typography>
+      <Typography sx={{ fontFamily: 'Spectral', fontWeight: 800 }}>
         Si ya tienes cuenta,
         <Button
           onClick={() => navigate('/Login')}
           sx={{
             color: '#66129b',
-            fontWeight: 700,
+            fontWeight: 800,
+            fontFamily: 'Spectral',
             '&:hover': {
               color: '#9b12a6',
             },

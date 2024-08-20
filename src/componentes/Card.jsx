@@ -87,7 +87,12 @@ export const Card = ({ filtro }) => {
               }}
             >
               <Typography
-                sx={{ color: 'white', fontWeight: 700, fontSize: 20 }}
+                sx={{
+                  fontFamily: 'Kurale',
+                  color: 'white',
+                  fontWeight: 700,
+                  fontSize: 20,
+                }}
               >
                 {producto.nombre}
               </Typography>
@@ -97,11 +102,12 @@ export const Card = ({ filtro }) => {
                   textAlign: 'center',
                   fontSize: 13,
                   fontWeight: 700,
+                  fontFamily: 'Spectral',
                 }}
               >
                 {producto.descripcion}
               </Typography>
-              <Typography sx={{ color: 'white' }}>
+              <Typography sx={{ color: 'white', fontFamily: 'Spectral' }}>
                 ${producto.precio}
               </Typography>
             </Box>
@@ -118,6 +124,7 @@ export const Card = ({ filtro }) => {
                 to={`/CardDetalle/${producto.id}`}
                 style={{
                   textDecoration: 'none',
+                  fontFamily: 'Spectral',
                   color: hoveredLink === producto.id ? '#7d2de8' : 'white',
                 }}
                 onMouseEnter={() => handleMouseEnter(producto.id)}
@@ -125,23 +132,13 @@ export const Card = ({ filtro }) => {
               >
                 ver más
               </Link>
-              {/* <Button
-                  onClick={() => agregarAlCarrito(producto)}
-                  sx={{
-                    color: 'white',
-                    borderRadius: 2,
-                    backgroundColor: '#691b76',
-                    padding: '3px 15px',
-                    fontSize: '13px',
-                  }}
-                >
-                  agregar Al Carrito
-                </Button> */}
             </Box>
           </Box>
         ))
       ) : (
-        <Typography>No se encontraron productos</Typography>
+        <Typography sx={{ fontFamily: 'Spectral' }}>
+          No se encontraron productos
+        </Typography>
       )}
     </Container>
   );

@@ -34,7 +34,7 @@ export const Agradecimiento = () => {
           <Box
             sx={{
               display: 'flex',
-              justifyContent: 'flex-start', // Alinea a la izquierda
+              justifyContent: 'flex-start',
             }}
           >
             <Button
@@ -43,6 +43,7 @@ export const Agradecimiento = () => {
                 color: '#51074d',
                 width: 'auto',
                 fontWeight: 700,
+                fontFamily: 'Spectral',
                 fontSize: 12,
                 display: 'inline-block',
                 '&:hover': {
@@ -61,6 +62,7 @@ export const Agradecimiento = () => {
             textAlign: 'center',
             fontWeight: 700,
             color: '#5c07a6',
+            fontFamily: 'Spectral',
           }}
         >
           {modal === 0 && 'Se ha registrado correctamente'}
@@ -73,6 +75,7 @@ export const Agradecimiento = () => {
                 fontSize: 20,
                 textAlign: 'center',
                 fontWeight: 500,
+                fontFamily: 'Spectral',
               }}
             >
               Su pedido llegará en 48hs
@@ -82,6 +85,7 @@ export const Agradecimiento = () => {
                 fontSize: 20,
                 textAlign: 'center',
                 fontWeight: 500,
+                fontFamily: 'Spectral',
               }}
             >
               Aproveche nuestras promociones
