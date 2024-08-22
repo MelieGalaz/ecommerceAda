@@ -9,10 +9,10 @@ export const setCartLS = (carrito) => {
 
 export const clearCartAfterTimeout = (setCarrito) => {
   const cartTimestamp = localStorage.getItem('cartTimestamp');
-  const oneMinuteInMs = 60 * 1000;
-  // const oneDayInMs = 24 * 60 * 60 * 1000;
 
-  if (cartTimestamp && Date.now() - cartTimestamp >= oneMinuteInMs) {
+  const oneDayInMs = 24 * 60 * 60 * 1000;
+
+  if (cartTimestamp && Date.now() - cartTimestamp >= oneDayInMs) {
     localStorage.removeItem('carrito');
     localStorage.removeItem('cartTimestamp');
 

@@ -58,6 +58,7 @@ export const FirebaseProvider = ({ children }) => {
     };
     isAuth();
   }, []);
+
   const finalizarCompra = async (carrito, subtotal) => {
     if (user && user.uid) {
       try {

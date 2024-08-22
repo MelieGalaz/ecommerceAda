@@ -219,7 +219,7 @@ export const NavBar = () => {
               <Tooltip title="El carrito se vaciará en 24hs">
                 <div>
                   <HiShoppingCart
-                    style={{ fontSize: '30px', marginTop: '12px' }}
+                    style={{ fontSize: '30px', marginTop: '8px' }}
                     onClick={toggleDrawer('right', true)}
                   />
                 </div>

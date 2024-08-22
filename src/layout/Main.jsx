@@ -22,10 +22,7 @@ export const Main = () => {
       <Route path="Agradecimiento" element={<Agradecimiento />} />
       <Route path="Registrar" element={<Registrar />} />
       <Route path="CardDetalle/:id" element={<CardDetalle />} />
-      <Route
-        path="Checkout"
-        element={user ? <Checkout /> : <Navigate to="/Login" />}
-      />
+      <Route path="Checkout" element={user && <Checkout />} />
       <Route path="OrdenesHistorial" element={<OrdenesHistorial />} />
 
       <Route path="*" element={<NotFound />} />
